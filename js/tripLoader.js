@@ -1,12 +1,14 @@
 /**
  * tripLoader.js
- * Fetches trip JSON data from data/trips/{id}.json
- * Future: will drive trip.html template rendering
+ * Fetches trip JSON from data/trips/{id}.json
+ * Returns parsed trip object or throws on failure.
  */
-async function loadTrip(tripId) {
-  const response = await fetch(`/travel/data/trips/${tripId}.json`);
-  if (!response.ok) throw new Error(`Trip not found: ${tripId}`);
-  return response.json();
+export async function loadTrip(tripId) {
+  const res = await fetch(`/travel/data/trips/${tripId}.json`);
+  if (!res.ok) throw new Error(`Trip not found: ${tripId}`);
+  return res.json();
 }
 
-export { loadTrip };
+export async function loadAllTrips(ids) {
+  return Promise.all(ids.map(loadTrip));
+}

@@ -1,0 +1,48 @@
+{
+  "id": "banff-jasper-2026",
+  "title": "Banff & Jasper",
+  "destination": "Alberta & British Columbia, Canada",
+  "dates": {
+    "start": "2026-06-16",
+    "end": "2026-06-22",
+    "display": "Jun 16 – 22, 2026"
+  },
+  "coverImage": "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?w=800&q=80&auto=format&fit=crop",
+  "status": "upcoming",
+  "travellers": 4,
+  "tripType": "Family road trip",
+  "accessibility": true,
+  "specialOccasion": "Mom's birthday Jun 16",
+  "summary": "7 days through Canada's most spectacular national parks — Kootenay, Banff, Yoho, and Jasper. Family road trip with accessibility in mind, ending with the Drumheller Badlands.",
+  "route": "Calgary → Kootenay → Banff → Icefields Parkway → Jasper → Drumheller → Calgary",
+  "bookBeforeYouGo": [
+    "Moraine Lake Shuttle — reservation.pc.gc.ca (April 15 at 8 AM MDT)",
+    "Maligne Lake Cruise — malignelake.com",
+    "Columbia Icefield Ice Explorer — banffjaspercollection.com",
+    "Zyka Banff dinner — (403) 985-7001",
+    "Banff Gondola — banffjaspercollection.com"
+  ],
+  "highlights": [
+    "Moraine Lake — Valley of the Ten Peaks",
+    "Columbia Icefield — walk on 10,000-year-old ice",
+    "Maligne Lake Spirit Island cruise",
+    "Miette Hot Springs — hottest in the Rockies",
+    "Drumheller Badlands"
+  ],
+  "accommodation": [
+    { "nights": "1–3", "location": "Canmore, AB", "note": "Bow Valley Trail area" },
+    { "nights": "4–6", "location": "Hinton, AB", "note": "50–70% cheaper than Jasper, all highlights within 1hr" },
+    { "nights": "7",   "location": "Calgary or drive home", "note": "After Drumheller" }
+  ],
+  "budget": {
+    "currency": "CAD",
+    "parksPass": 145,
+    "note": "Budget breakdown to be finalised"
+  },
+  "weather": {
+    "apiEnabled": false,
+    "averageHigh": "18°C",
+    "averageLow": "6°C",
+    "conditions": "Long days, occasional afternoon showers, snow possible at elevation"
+  }
+}
