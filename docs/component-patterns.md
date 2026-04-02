@@ -1,230 +1,286 @@
 # Component Patterns & JavaScript APIs
 
-> **Status:** ✅ Fully documented — Claude NEVER needs to fetch JS or HTML files to understand structure.
+> **How the website actually works**
+> Reference this doc to understand data flow and component behavior.
+
+## Architecture Overview
+
+### Data Flow
+```
+data/trips/*.json → tripLoader.js → tripRenderer.js → DOM
+```
+
+1. **Trip JSONs** live in `data/trips/{trip-id}.json`
+2. **tripLoader.js** fetches them via fetch API
+3. **tripRenderer.js** creates HTML strings
+4. **app.js** orchestrates everything
 
 ---
 
-## Current Architecture
+## File Responsibilities
 
-Both pages are **self-contained monoliths** with inline CSS + JS. The target architecture moves to shared CSS files and a JSON data loader — but the HTML structure and JS API documented here remain stable.
+### `js/app.js` (Orchestrator)
+**Purpose:** Detects page type and initializes appropriate rendering
 
----
-
-## JavaScript Functions (trip pages)
-
-### `switchTab(id, btn)`
-Switches the visible day panel.
 ```javascript
-function switchTab(id, btn) {
-  // Hides all .tab-panel, removes .active from all .tab-btn
-  // Shows panel with matching id, marks btn active
-  // Scrolls to top
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  btn.classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-```
-**Called by:** `onclick="switchTab('d1', this)"` on each `.tab-btn`
-**Tab IDs:** `d1`, `d2`, `d3`, `d4`, `d5`, `d6`, `d7`, `info`
+// Homepage: Load all trips
+loadAllTrips().then(trips => {
+  renderTripCards(trips);
+  updateStats(trips);
+});
 
-### `toggleCard(card)`
-Expands/collapses a timeline card.
-```javascript
-function toggleCard(card) {
-  card.classList.toggle('open');
-}
-```
-**Called by:** `onclick="toggleCard(this)"` on each `.card`
-**Effect:** `.open` class → shows `.card-body`, rotates `.card-chevron` 180°
-
-### Auto-open first card (init)
-```javascript
-document.querySelectorAll('.tab-panel').forEach(panel => {
-  const first = panel.querySelector('.card');
-  if (first) first.classList.add('open');
+// Trip detail page: Load specific trip
+loadTripById(tripId).then(trip => {
+  renderTripDetail(trip);
 });
 ```
-Runs on DOMContentLoaded. First card in every day panel starts open.
+
+**What it does:**
+- Checks if we're on homepage or trip detail page
+- Calls appropriate loader functions
+- Handles errors gracefully
 
 ---
 
-## HTML Structure — Trip Page
+### `js/tripLoader.js` (Data Layer)
+**Purpose:** Fetch trip data from JSON files
 
-```
-body
-├── .top-nav
-│   ├── a.back-btn  (← All Trips → ../../index.html)
-│   └── .top-nav-title  (trip name, em = italic accent)
-├── .hero
-│   ├── svg.hero-mountains  (decorative mountain silhouette)
-│   ├── .hero-eyebrow  ("Family Trip · June 2025")
-│   ├── h1  ("Banff & Jasper")
-│   ├── p.hero-sub  (route summary)
-│   └── .hero-pills  (metadata chips: travellers, dates, drive type, accessibility, birthday)
-├── .notice-bar  ("Book before you go: ..." — red-alert items)
-├── .tab-nav-wrap  (sticky below top-nav)
-│   └── .tab-nav
-│       └── button.tab-btn × 8  (Day 1–7 + Info)
-│           ├── span.day-num  ("Day 1" — Playfair 18px)
-│           └── span.day-date  ("Jun 16 🎂" — DM Sans 10px)
-└── .main
-    ├── #d1.tab-panel.active  (Day 1)
-    ├── #d2.tab-panel         (Day 2)
-    │   ... (d3–d7 same structure)
-    └── #info.tab-panel       (Essentials / Info)
+#### Functions:
+
+**`loadAllTrips()`**
+```javascript
+// Returns: Promise<Array<Trip>>
+// Fetches all trip JSONs and returns array
+// Filters out failed loads (null)
 ```
 
-### Day Panel Internal Structure
+**`loadTripById(id)`**
+```javascript
+// Returns: Promise<Trip>
+// Fetches single trip JSON by ID
+// Throws error if not found
 ```
-#dN.tab-panel
-├── .day-header
-│   ├── .day-header-left
-│   │   ├── h2  ("Calgary → Kootenay → Banff")
-│   │   └── p   (date · notes · depart time)
-│   └── .day-stats
-│       └── .day-stat × N  (val + label)
-├── .day-overview  (horizontal scroll strip)
-│   └── .overview-stop × N  (time + icon + name)
-├── [optional] .birthday-banner
-├── .timeline
-│   └── .tblock × N
-│       ├── .tblock-dot[.drive|.food|.sleep|.special]
-│       └── .card[.drive-card|.food-card|.special-card]
-│           ├── .card-head  (onclick=toggleCard)
-│           │   ├── .card-icon
-│           │   ├── .card-head-info
-│           │   │   ├── .card-time
-│           │   │   └── .card-title  [+ .badge]
-│           │   ├── .card-dur
-│           │   └── .card-chevron
-│           └── .card-body
-│               └── .card-body-inner
-│                   ├── [.place-spotlight]  h4 + p
-│                   ├── [.restaurant-highlight]  h4 + .rest-meta + p + .rest-dishes
-│                   ├── [.info-grid]  .info-box × N  (label + val)
-│                   ├── [p.card-desc]
-│                   └── .tags  .tag[.tag-knee|.tag-tip|.tag-book|.tag-bday|.tag-note] × N
-├── [optional] .section-label  (Plan B / alternate route)
-└── .booking-box  (day reminders)
-    └── .booking-item × N  (icon + strong title + body text)
+
+**`getTripUrl(tripId)`**
+```javascript
+// Returns: string
+// Generates URL for trip detail page
+// Example: "/travel/trip.html?id=banff-jasper-2026"
+```
+
+**Path Resolution:**
+```javascript
+const BASE_PATH = window.location.hostname === 'saraf-aman.github.io' 
+  ? '/travel'  // GitHub Pages
+  : '';        // Local development
 ```
 
 ---
 
-## HTML Structure — Homepage (`index.html`)
+### `js/tripRenderer.js` (Presentation Layer)
+**Purpose:** Convert trip data into HTML strings
 
+#### Functions:
+
+**`renderTripCards(trips)`**
+```javascript
+// Input: Array<Trip>
+// Output: void (modifies DOM)
+// Updates #trip-grid with trip cards
 ```
-body
-├── nav
-│   ├── a.nav-brand  ("Travels with Aman")
-│   └── .nav-links
-│       └── a.nav-link × 3  (Trips, About, GitHub)
-├── .hero
-│   ├── .hero-eyebrow
-│   ├── h1
-│   ├── p.hero-desc
-│   └── .hero-stats
-│       └── div × 3  (.stat-val + .stat-label)
-└── .section
-    ├── #trips
-    │   ├── .section-header  (.section-title + .section-line)
-    │   └── .trip-grid
-    │       └── a.trip-card × N  (or div.trip-card.coming-soon)
-    │           ├── img.card-img  (200px, object-fit cover)
-    │           └── .card-body
-    │               ├── .card-location  (DM Mono uppercase)
-    │               ├── .card-title  (Playfair)
-    │               ├── p.card-desc
-    │               ├── .card-tags  (emoji + text chips)
-    │               ├── ul.card-highlights  (li × N)
-    │               └── span.card-cta  OR span.coming-badge
-    ├── #about
-    │   ├── .section-header
-    │   └── .about-grid  (2-col: narrative + .principles)
-    │       └── .principle × 4  (.principle-title + .principle-desc)
-    ├── .github-bar  (dark bg, white CTA button)
-    └── footer
+
+**`renderTripDetail(trip)`**
+```javascript
+// Input: Trip object
+// Output: void (modifies DOM)
+// Renders full trip detail page
+```
+
+**`updateStats(trips)`**
+```javascript
+// Input: Array<Trip>
+// Output: void (modifies DOM)
+// Calculates and updates hero stats
+```
+
+**Internal Helpers:**
+- `createTripCard(trip)` - Returns HTML string for single card
+
+---
+
+### `js/utils.js` (Helpers)
+**Purpose:** Shared utility functions
+
+```javascript
+formatDate(dateString)        // "2026-06-16" → "Jun 16, 2026"
+formatDateRange(start, end)   // Smart range formatting
+daysBetween(start, end)       // Calculate trip duration
 ```
 
 ---
 
-## Adding a New Trip Card (Homepage)
+## HTML Structure
 
-To add a new trip to `index.html`, copy this template into `.trip-grid`:
+### Homepage (`index.html`)
+
+**Key elements:**
+```html
+<div id="trip-grid"></div>      <!-- Trip cards render here -->
+<div id="hero-stats"></div>     <!-- Stats update here -->
+```
+
+**Data flow:**
+1. Page loads
+2. `app.js` calls `loadAllTrips()`
+3. Trip JSONs fetched
+4. `renderTripCards()` populates grid
+5. `updateStats()` updates hero numbers
+
+---
+
+### Trip Detail (`trip.html`)
+
+**Key elements:**
+```html
+<div id="trip-root"></div>      <!-- Full trip detail renders here -->
+```
+
+**Data flow:**
+1. Page loads with `?id=banff-jasper-2026`
+2. `app.js` extracts trip ID from URL
+3. `loadTripById()` fetches specific JSON
+4. `renderTripDetail()` populates root element
+5. Page title updated dynamically
+
+---
+
+## Trip Card Anatomy
 
 ```html
-<!-- NEW TRIP -->
-<a href="trips/{slug}/index.html" class="trip-card">
-  <img class="card-img" src="https://images.unsplash.com/..." alt="{description}" loading="lazy">
+<a href="trip.html?id={id}" class="trip-card">
+  <img class="card-img" src="{coverImage}">
   <div class="card-body">
-    <div class="card-location">{Country} &middot; {Region}</div>
-    <div class="card-title">{City} &amp; <em>{Region}</em></div>
-    <p class="card-desc">{2-3 sentence description}</p>
+    <div class="card-location">{destination}</div>
+    <div class="card-title">{title}</div>
+    <p class="card-desc">{summary}</p>
     <div class="card-tags">
-      <span class="card-tag">📅 {Month Year}</span>
-      <span class="card-tag">{emoji} {attribute}</span>
+      <span class="card-tag">{dates.display}</span>
+      <!-- More tags... -->
     </div>
     <ul class="card-highlights">
-      <li>{highlight 1}</li>
-      <li>{highlight 2}</li>
+      <li>{highlight}</li>
+      <!-- Up to 5 highlights -->
     </ul>
     <span class="card-cta">View full itinerary →</span>
   </div>
 </a>
 ```
 
-For a **coming soon** card (no link, grayed out):
+**Coming Soon State:**
 ```html
 <div class="trip-card coming-soon">
-  <!-- same internals but no <a> wrapper -->
-  <!-- omit card-highlights and card-cta -->
-  <!-- add: <span class="coming-badge">Planning · {Month Year}</span> -->
+  <!-- Same structure, but not clickable -->
+  <span class="coming-badge">Planning · {dates}</span>
 </div>
 ```
 
 ---
 
-## Adding a New Day Tab (Trip Page)
+## Adding a New Trip
 
-1. Add button to `.tab-nav`:
-```html
-<button class="tab-btn" onclick="switchTab('d8', this)">
-  <span class="day-num">Day 8</span>
-  <span class="day-date">Jun 23</span>
-</button>
+### Step 1: Create JSON
+```bash
+data/trips/new-trip-2026.json
 ```
 
-2. Add panel to `.main`:
-```html
-<div id="d8" class="tab-panel">
-  <div class="day-header">...</div>
-  <div class="day-overview">...</div>
-  <div class="timeline">
-    <!-- .tblock entries -->
-  </div>
-  <div class="booking-box">...</div>
-</div>
+### Step 2: Add to trip list
+```javascript
+// In tripLoader.js
+const tripIds = [
+  'banff-jasper-2026',
+  'new-trip-2026'  // Add here
+];
+```
+
+### Step 3: Push to GitHub
+```bash
+git add data/trips/new-trip-2026.json
+git commit -m "Add new trip"
+git push
+```
+
+That's it! Website auto-updates.
+
+---
+
+## Modifying Components
+
+### Changing Trip Card Design
+**File to edit:** `css/components.css`
+**Class:** `.trip-card`
+
+### Changing Card Rendering Logic
+**File to edit:** `js/tripRenderer.js`
+**Function:** `createTripCard(trip)`
+
+### Adding New Data Fields
+1. Update JSON in `data/trips/`
+2. Update `createTripCard()` or `renderTripDetail()` to use new field
+3. No CSS changes needed if using existing components
+
+---
+
+## Error Handling
+
+**Failed trip load:**
+```javascript
+// tripLoader.js handles this
+loadTripById(id).catch(err => {
+  console.warn(`Failed to load trip ${id}:`, err);
+  return null; // Filters out in loadAllTrips()
+});
+```
+
+**No trips found:**
+```javascript
+// tripRenderer.js shows fallback
+if (!trips || trips.length === 0) {
+  grid.innerHTML = '<p class="loading-text">No trips yet!</p>';
+}
+```
+
+**Invalid trip ID:**
+```javascript
+// app.js shows error page
+if (!tripId) {
+  root.innerHTML = '<p class="error-text">No trip ID specified.</p>';
+}
 ```
 
 ---
 
-## File Modification Rules Summary
+## Performance Notes
 
-| Change needed | Touch this file |
-|---------------|------------------|
-| Trip content (activity, time, description) | `data/trips/{id}.json` (future) / current: `trips/{id}/index.html` |
-| Trip card on homepage | `index.html` — add to `.trip-grid` |
-| Card colors / tag styles | `css/components.css` |
-| Color palette / tokens | `css/theme.css` |
-| Page layout / grid | `css/layout.css` |
-| Tab/card JS behavior | `js/tripRenderer.js` (future) / current: inline `<script>` in trip HTML |
+- **Lazy loading images:** `loading="lazy"` on all card images
+- **Minimal DOM manipulation:** Build HTML strings, insert once
+- **No framework overhead:** Pure vanilla JS
+- **Small JSON files:** 2-5KB per trip
+- **Cached CSS/JS:** Browsers cache static assets
 
 ---
 
-## What NEVER Changes (Don't Touch)
-- The `switchTab` / `toggleCard` JS API — stable
-- The `.tblock` → `.card` → `.card-body` nesting — stable
-- Font imports (Google Fonts CDN link) — stable
-- The `:root` CSS variable names — stable (changing breaks all inline references)
+## Future Enhancements
+
+### Planned Features
+1. **Weather API integration** - Live weather data for trip locations
+2. **Search/filter** - Filter trips by destination, date, type
+3. **Trip index JSON** - Auto-discover trips without hardcoding IDs
+4. **Day-by-day itinerary** - Full detailed daily breakdown
+5. **Photo galleries** - Image carousels for each trip
+
+### Where they'll go
+- Weather: `js/weatherAPI.js` (already stubbed)
+- Search: New `js/search.js` module
+- Trip index: `data/trips-index.json`
+- Itinerary: Enhanced `renderTripDetail()` function
+- Photos: New component in `components.css`
