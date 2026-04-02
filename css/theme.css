@@ -1,0 +1,44 @@
+/* ============================================================
+   TRIP PAGE THEME — Banff/Jasper blue-sky palette
+   Used by: trips/*/index.html
+   ============================================================ */
+:root {
+  /* Core palette */
+  --sky:          #daeaf5;
+  --sky-mid:      #b8d6ed;
+  --sky-deep:     #7fb3d3;
+  --glacier:      #4a90b8;
+  --glacier-dark: #2c6a90;
+  --snow:         #ffffff;
+  --mist:         #f4f8fc;
+  --mist-dark:    #e6f0f7;
+  --stone:        #8fa3b1;
+  --stone-dark:   #5c7a8a;
+  --slate:        #3d5a6a;
+  --ink:          #1e3040;
+  --amber:        #d4872a;
+  --amber-light:  #e9a84a;
+  --amber-pale:   #fdf3e3;
+
+  /* Semantic text */
+  --text-dark:  #1a2a35;
+  --text-mid:   #3d5a6a;
+  --text-light: #7a9aaa;
+  --border:     #ccdde8;
+}
+
+/* ============================================================
+   HOMEPAGE THEME — Warm cream palette
+   Used by: index.html
+   ============================================================ */
+/* Declared inline in index.html — see docs/ui-design-system.md */
+
+/* Shared animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
