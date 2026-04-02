@@ -1,30 +1,23 @@
 # Repository Structure
 
-## Target Architecture (After Optimization)
+## Current Architecture (Production)
 
 ```
 travel/
-├── index.html                      # Homepage (lightweight, loads trip data)
-├── trip.html                       # Trip detail page template (loads specific trip)
+├── index.html                      # Homepage (lightweight, loads base + homepage CSS)
 │
 ├── css/
-│   ├── theme.css                   # Design tokens (colors, fonts, spacing)
-│   ├── layout.css                  # Grid, containers, page structure
-│   ├── components.css              # Reusable component styles
-│   └── utilities.css               # Helper classes
-│
-├── js/
-│   ├── app.js                      # Main app logic
-│   ├── tripLoader.js               # Loads trip JSON data
-│   ├── tripRenderer.js             # Renders trip cards & details
-│   ├── weatherAPI.js               # Future: Weather integration
-│   └── utils.js                    # Date formatters, etc.
-│
-├── data/
+│   ├── base.css                    # Shared foundation: reset, fonts, animations, CSS vars (~2KB)
+│   ├── homepage.css                # Homepage-specific styles (~10KB)
 │   └── trips/
-│       ├── banff-jasper-2024.json  # Banff trip data
-│       ├── barcelona-2025.json     # Barcelona trip data (future)
-│       └── ...                     # More trips
+│       ├── banff-2026.css          # Banff trip styles (blue mountain theme) (~10KB)
+│       └── barcelona-2025.css      # Future: Barcelona trip styles (terracotta theme)
+│
+├── trips/
+│   ├── banff-jasper-2025/
+│   │   └── index.html              # Banff trip page (lightweight ~5KB, loads base + banff CSS)
+│   └── barcelona-2025/
+│       └── index.html              # Future: Barcelona trip page
 │
 ├── images/
 │   ├── trips/
@@ -32,42 +25,87 @@ travel/
 │   │   └── barcelona/
 │   └── icons/                      # UI icons
 │
-├── docs/                           # Project knowledge (LOCAL ONLY)
+├── docs/                           # Project knowledge (LOCAL ONLY, never deployed)
 │   ├── project-context.md
-│   ├── repo-structure.md
-│   ├── trip-data-template.md
+│   ├── repo-structure.md           # This file
 │   ├── workflow-state.md
 │   ├── ui-design-system.md
-│   ├── component-patterns.md
 │   └── file-modification-rules.md
 │
 └── planning/                       # Draft content (not deployed)
-    ├── barcelona-planning.md
-    └── workflow.md
-```
-
-## Current Structure (Before Optimization)
-```
-travel/
-├── index.html                      # Homepage with embedded trip data
-└── trip/
-    └── index.html                  # Trip detail with embedded data
+    └── barcelona-planning.md
 ```
 
 ## File Size Guidelines
-- Trip JSON: ~2-5KB each
-- CSS files: ~2-3KB each
-- JS modules: ~1-3KB each
-- HTML templates: ~1-2KB each
+- `base.css`: ~2KB (rarely changes)
+- `homepage.css`: ~10KB (documented in ui-design-system.md)
+- Trip CSS (`css/trips/*.css`): ~10KB each (documented in ui-design-system.md)
+- Trip HTML: ~5KB each (content only, no embedded CSS)
+
+## CSS Architecture
+
+### Base CSS (Shared)
+- CSS reset and box-sizing
+- Font family declarations
+- CSS variables (colors)
+- Animations
+- Basic body styles
+
+### Homepage CSS
+- Warm cream/brown theme
+- Homepage-specific components (nav, hero, trip cards, about section, footer)
+
+### Trip-Specific CSS
+- Each trip has its own CSS file in `css/trips/`
+- Unique color schemes per destination:
+  - **Banff**: Blue mountain theme (sky, glacial lakes)
+  - **Barcelona**: Terracotta Mediterranean theme (planned)
+  - **Future trips**: Custom themes matching destinations
+- Trip page components (tabs, timeline, collapsible blocks, day navigation)
 
 ## Files Claude Should NEVER Fetch
-- theme.css (documented in ui-design-system.md)
-- layout.css (documented in ui-design-system.md)
-- utilities.css (static helper classes)
+- `css/base.css` (documented in ui-design-system.md)
+- `css/homepage.css` (documented in ui-design-system.md)
+- `css/trips/*.css` (documented in ui-design-system.md)
 - Image files
-- Any CSS/JS not being actively modified
 
 ## Files Claude Fetches Only When Needed
-- Specific trip JSON being updated: `data/trips/{trip-id}.json`
-- Specific JS module being modified: `js/{module}.js`
-- HTML template if structure changes: `index.html` or `trip.html`
+- Specific trip HTML being updated: `trips/{trip-name}/index.html` (~5KB)
+- **NEVER fetch CSS files** - they're documented in ui-design-system.md
+
+## Trip Page Structure
+
+Each trip follows this pattern:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="/travel/css/base.css">
+  <link rel="stylesheet" href="/travel/css/trips/banff-2026.css">
+</head>
+<body>
+  <!-- All trip content here (HTML only, no embedded CSS) -->
+</body>
+</html>
+```
+
+## Token Efficiency
+
+**Before optimization:**
+- Trip page: 65KB (HTML + embedded CSS)
+- Edit one day: 65KB fetch + 65KB write = 130K tokens
+
+**After optimization:**
+- Trip page: 5KB (HTML only)
+- Trip CSS: 10KB (documented, never fetched)
+- Edit one day: 5KB fetch + 5KB write = 10K tokens
+- **92% token reduction!**
+
+## Why This Architecture
+
+1. **Token Efficiency**: Only fetch the small HTML file when editing trip content
+2. **Unique Designs**: Each trip can have its own color scheme and theme
+3. **No CSS Conflicts**: Homepage and trips use separate CSS files
+4. **Scalable**: Easy to add new trips with custom themes
+5. **Maintainable**: CSS changes don't affect HTML, and vice versa

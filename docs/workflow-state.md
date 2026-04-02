@@ -1,58 +1,59 @@
 # Current Workflow State
 
-## CRITICAL: Current Repo Status (AS OF 2025-04-02)
-
-### ✅ What's Working
-- `data/trips/banff-jasper-2026.json` exists and has proper structure
-- CSS files exist (theme.css, layout.css, components.css, utilities.css)
-- JS files exist (app.js, tripLoader.js, tripRenderer.js, utils.js, weatherAPI.js)
-- `trip.html` template exists but is not yet functional
-- `index.html` homepage exists
-
-### ⚠️ What's Incomplete
-- **OLD monolithic HTML still exists:** `trips/banff-jasper-2025/index.html` (65KB)
-- **JavaScript not connected:** trip.html doesn't load JSON data yet
-- **No dynamic rendering:** Site doesn't use data/trips/ JSONs yet
-- **Homepage not updated:** Still shows old structure
-
-### 🎯 Next Priority Tasks
-1. **DO NOT create new folder structures** - Use existing `data/trips/`
-2. **DO NOT break CSS** - Existing CSS files are working
-3. **Complete the data-driven migration:**
-   - Make tripLoader.js actually load from `data/trips/*.json`
-   - Make tripRenderer.js render trip details
-   - Update index.html to render trip cards from JSON
-   - Connect trip.html to load specific trip via ?id= parameter
-
-## STRICT RULES for Future Claude Instances
-
-### ❌ NEVER DO THIS
-- Create new `trips/{name}/` folders with individual index.html files
-- Modify CSS files without explicit user request
-- Change file paths from what's documented in repo-structure.md
-- Create duplicate structures
-
-### ✅ ALWAYS DO THIS
-- Put trip data ONLY in `data/trips/{trip-id}.json`
-- Follow repo-structure.md exactly
-- Keep CSS files unchanged unless user explicitly asks
-- Make JavaScript load from `data/trips/` folder
-- Ask for clarification if structure seems wrong
-
 ## Active Work
-- **Current Trip:** Banff & Jasper 2026 (JSON created, needs JS connection)
-- **Next Task:** Complete data-driven architecture migration
-- **User Status:** Frustrated with other Claude breaking structure
+- **Current Task:** Setting up Banff trip CSS extraction
+- **Status:** Homepage ✅ complete, Trip page ⏳ in progress
+- **Next:** Extract Banff CSS to `css/trips/banff-2026.css`
 
-## Recent Changes
-- 2025-04-02: Created project documentation files
-- 2025-04-02: User reported other Claude broke CSS and ignored structure
-- 2025-04-02: Confirmed data/trips/ structure exists and is correct
+## Recent Changes (2025-04-02)
+
+### Architecture Overhaul ✅
+- Deleted failed `trip.html` dynamic template
+- Created modular CSS structure:
+  - `css/base.css` - Shared foundation
+  - `css/homepage.css` - Homepage styling
+  - `css/trips/` - Trip-specific CSS folder
+- Updated homepage to use new CSS structure
+- Homepage now working perfectly with warm cream theme
+
+### Token Optimization ✅
+- Homepage HTML: 5KB (was mixed with CSS)
+- Homepage CSS: 12KB total (base + homepage)
+- Trip HTML: Will be ~5KB (currently 65KB with embedded CSS)
+- **Target:** 92% token reduction on trip edits
+
+## Pending Tasks
+
+### Immediate (In Progress)
+- [ ] Extract Banff trip CSS from embedded styles
+- [ ] Create `css/trips/banff-2026.css` with blue mountain theme
+- [ ] Update `trips/banff-jasper-2025/index.html` to reference external CSS
+- [ ] Verify Banff trip page renders correctly
+- [ ] Document Banff CSS in `ui-design-system.md`
+
+### Future
+- [ ] Create Barcelona trip plan (markdown)
+- [ ] Create Barcelona trip CSS with terracotta theme
+- [ ] Create Barcelona trip HTML
+- [ ] Add trip comparison feature
+- [ ] Weather API integration
 
 ## Trips Status
-1. **Banff & Jasper 2026** - JSON exists in `data/trips/banff-jasper-2026.json`
-2. **Old Banff folder** - `trips/banff-jasper-2025/` exists (legacy, should be removed)
-3. **Barcelona** - Planning phase only
+
+### 1. Banff & Jasper (June 2026)
+- **Status:** Content complete, CSS extraction in progress
+- **Theme:** Blue mountain (sky, glacial lakes, snow)
+- **File:** `trips/banff-jasper-2025/index.html`
+- **CSS:** Will be `css/trips/banff-2026.css`
+- **Days:** 7 days documented
+- **Special notes:** Family trip, accessibility-focused, mom's birthday
+
+### 2. Barcelona & Catalonia (August 2025)
+- **Status:** Planning phase, no code yet
+- **Theme:** Terracotta Mediterranean (warm oranges, coastal blues)
+- **File:** Will be `trips/barcelona-2025/index.html`
+- **CSS:** Will be `css/trips/barcelona-2025.css`
+- **Planned:** Gaudí, Costa Brava, Montserrat, medieval towns
 
 ## User Preferences
 - Detailed day-by-day itineraries with timing
@@ -60,7 +61,31 @@
 - Budget-conscious with occasional splurges
 - Prefers morning activities to beat crowds
 - Values insider tips and practical logistics
-- **VERY frustrated when structure is not followed**
+- Family-friendly with accessibility considerations
+
+## Architecture Decisions Log
+
+### CSS Structure (FINAL)
+✅ **Decision:** Modular CSS with trip-specific themes
+- Homepage: Warm cream/brown (welcoming directory)
+- Trips: Unique themes per destination
+- NO unified color scheme across site
+- Each trip page can have custom design
+
+### File Structure (FINAL)
+✅ **Decision:** Individual trip HTML files (NOT dynamic loading)
+- Each trip: `trips/{trip-name}/index.html`
+- Each trip CSS: `css/trips/{trip-name}.css`
+- NO single `trip.html` template
+- NO JSON data loading
+- Self-contained but lightweight pages
+
+### Token Optimization Strategy (FINAL)
+✅ **Decision:** External CSS + documentation
+- Extract CSS to separate files
+- Document all CSS in `ui-design-system.md`
+- Never fetch CSS files (use docs instead)
+- Only fetch lightweight trip HTML when editing
 
 ## Future Enhancements
 - Weather API integration
@@ -68,3 +93,4 @@
 - Budget calculator
 - Photo galleries
 - Trip comparison tools
+- Print-friendly versions
