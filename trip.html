@@ -5,24 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Trip — Aman's Travel</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/travel/css/theme.css">
-<link rel="stylesheet" href="/travel/css/layout.css">
-<link rel="stylesheet" href="/travel/css/components.css">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/utilities.css">
 </head>
 <body data-page="trip">
-  <!--
-    Generic trip detail template.
-    Future: tripRenderer.js reads ?id= param, loads data/trips/{id}.json,
-    and populates this shell dynamically.
 
-    For now, individual trip pages live in trips/{slug}/index.html
-    and link back to /travel/index.html.
-  -->
-  <div id="trip-root">
-    <p style="font-family:sans-serif;padding:40px;color:#3d5a6a">
-      Loading trip…
-    </p>
+<nav>
+  <a href="index.html" class="nav-brand">Travels <span>with Aman</span></a>
+  <div class="nav-links">
+    <a href="index.html#trips" class="nav-link">← All trips</a>
+    <a href="https://github.com/saraf-aman/travel" target="_blank" class="nav-link">GitHub</a>
   </div>
-  <script type="module" src="/travel/js/app.js"></script>
+</nav>
+
+<div id="trip-root">
+  <div class="loading-container">
+    <p class="loading-text">Loading trip details...</p>
+  </div>
+</div>
+
+<footer>
+  <em style="font-family:'Playfair Display',serif;font-style:italic;color:var(--accent);font-size:14px;">Travels with Aman</em><br>
+  <span style="margin-top:6px;display:block;opacity:0.7">Built trip by trip &middot; <a href="https://github.com/saraf-aman/travel">github.com/saraf-aman/travel</a></span>
+</footer>
+
+<script type="module" src="js/app.js"></script>
 </body>
 </html>
