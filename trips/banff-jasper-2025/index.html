@@ -5,191 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Banff & Jasper 2025 — Aman's Travel</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --sky:#daeaf5;--sky-mid:#b8d6ed;--sky-deep:#7fb3d3;--glacier:#4a90b8;--glacier-dark:#2c6a90;
-    --snow:#ffffff;--mist:#f4f8fc;--mist-dark:#e6f0f7;--stone:#8fa3b1;--stone-dark:#5c7a8a;
-    --slate:#3d5a6a;--ink:#1e3040;--amber:#d4872a;--amber-light:#e9a84a;--amber-pale:#fdf3e3;
-    --text-dark:#1a2a35;--text-mid:#3d5a6a;--text-light:#7a9aaa;--border:#ccdde8;
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{background:var(--mist);color:var(--text-dark);font-family:'DM Sans',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden}
-
-  /* TOP NAV WITH BACK BUTTON */
-  .top-nav{
-    background:var(--snow);
-    border-bottom:1px solid var(--border);
-    padding:0 24px;
-    height:48px;
-    display:flex;
-    align-items:center;
-    gap:20px;
-    position:sticky;
-    top:0;
-    z-index:200;
-    box-shadow:0 1px 8px rgba(44,106,144,0.08);
-  }
-  .back-btn{
-    display:inline-flex;
-    align-items:center;
-    gap:6px;
-    font-size:12px;
-    font-weight:500;
-    color:var(--glacier-dark);
-    text-decoration:none;
-    padding:5px 12px;
-    border-radius:6px;
-    border:1px solid var(--sky-mid);
-    background:var(--sky);
-    white-space:nowrap;
-    transition:all 0.15s;
-    flex-shrink:0;
-  }
-  .back-btn:hover{background:var(--glacier-dark);color:white;border-color:var(--glacier-dark)}
-  .top-nav-title{
-    font-family:'Playfair Display',serif;
-    font-size:14px;
-    font-weight:600;
-    color:var(--ink);
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-  }
-  .top-nav-title em{font-style:italic;color:var(--glacier-dark)}
-
-  .hero{background:linear-gradient(160deg,#e8f4fb 0%,#c8dff0 40%,#a8ccdf 100%);position:relative;overflow:hidden;padding:64px 24px 48px;text-align:center}
-  .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 110%,rgba(74,144,184,.25) 0%,transparent 70%),radial-gradient(ellipse 50% 30% at 10% 0%,rgba(255,255,255,.6) 0%,transparent 60%);pointer-events:none}
-  .hero-mountains{position:absolute;bottom:0;left:0;right:0;height:140px;pointer-events:none}
-  .hero-eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--glacier-dark);margin-bottom:14px;opacity:0;animation:fadeUp .6s ease .1s forwards}
-  .hero h1{font-family:'Playfair Display',serif;font-size:clamp(34px,7vw,66px);font-weight:700;color:var(--ink);line-height:1.05;margin-bottom:10px;opacity:0;animation:fadeUp .6s ease .25s forwards}
-  .hero h1 em{font-style:italic;color:var(--glacier-dark)}
-  .hero-sub{font-size:13px;font-weight:400;color:var(--stone-dark);letter-spacing:.05em;margin-bottom:28px;opacity:0;animation:fadeUp .6s ease .4s forwards}
-  .hero-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;opacity:0;animation:fadeUp .6s ease .55s forwards}
-  .hero-pill{background:rgba(255,255,255,.75);border:1px solid rgba(74,144,184,.25);border-radius:100px;padding:5px 14px;font-size:12px;font-weight:400;color:var(--slate);backdrop-filter:blur(4px)}
-  .hero-pill span{color:var(--amber);margin-right:4px}
-
-  .notice-bar{background:var(--amber-pale);border-bottom:1px solid rgba(212,135,42,.25);padding:9px 24px;text-align:center;font-size:12px;color:var(--text-mid)}
-  .notice-bar strong{color:var(--amber)}
-
-  .tab-nav-wrap{position:sticky;top:48px;z-index:100;background:var(--snow);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;box-shadow:0 2px 10px rgba(44,106,144,.07)}
-  .tab-nav-wrap::-webkit-scrollbar{display:none}
-  .tab-nav{display:flex;min-width:max-content;padding:0 16px}
-  .tab-btn{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--stone);background:none;border:none;padding:13px 16px 11px;cursor:pointer;white-space:nowrap;transition:color .2s;border-bottom:2px solid transparent;margin-bottom:-1px}
-  .tab-btn:hover{color:var(--glacier-dark)}
-  .tab-btn.active{color:var(--glacier-dark);border-bottom-color:var(--glacier)}
-  .tab-btn .day-num{display:block;font-family:'Playfair Display',serif;font-size:18px;font-weight:600;letter-spacing:0;text-transform:none;line-height:1;margin-bottom:2px}
-  .tab-btn .day-date{font-size:10px;opacity:.75}
-
-  .main{max-width:960px;margin:0 auto;padding:36px 20px 80px}
-  .tab-panel{display:none}
-  .tab-panel.active{display:block;animation:fadeIn .3s ease}
-
-  .day-header{margin-bottom:26px;padding-bottom:20px;border-bottom:1px solid var(--border);display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:14px}
-  .day-header-left h2{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--ink);line-height:1.1;margin-bottom:5px}
-  .day-header-left h2 em{font-style:italic;color:var(--glacier-dark)}
-  .day-header-left p{font-size:13px;color:var(--text-light);font-weight:300}
-  .day-stats{display:flex;gap:10px;flex-wrap:wrap}
-  .day-stat{text-align:center;background:var(--sky);border:1px solid var(--sky-mid);border-radius:12px;padding:10px 16px;min-width:72px}
-  .day-stat-val{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;color:var(--glacier-dark);line-height:1;margin-bottom:3px}
-  .day-stat-label{font-size:10px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--stone)}
-
-  .day-overview{display:flex;overflow-x:auto;gap:0;margin-bottom:28px;border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--snow);scrollbar-width:none;box-shadow:0 2px 10px rgba(44,106,144,.05)}
-  .day-overview::-webkit-scrollbar{display:none}
-  .overview-stop{flex:1;min-width:80px;text-align:center;padding:11px 5px;border-right:1px solid var(--border);transition:background .15s}
-  .overview-stop:last-child{border-right:none}
-  .overview-stop:hover{background:var(--mist)}
-  .overview-time{font-family:'DM Mono',monospace;font-size:10px;color:var(--glacier);margin-bottom:4px}
-  .overview-icon{font-size:16px;margin-bottom:4px}
-  .overview-name{font-size:10px;color:var(--text-mid);line-height:1.3;font-weight:400}
-
-  .timeline{position:relative;padding-left:28px}
-  .timeline::before{content:'';position:absolute;left:0;top:16px;bottom:16px;width:1px;background:linear-gradient(to bottom,var(--sky-deep) 0%,var(--border) 100%)}
-  .tblock{position:relative;margin-bottom:8px}
-  .tblock-dot{position:absolute;left:-34px;top:20px;width:12px;height:12px;border-radius:50%;border:2px solid var(--glacier);background:var(--snow);z-index:1}
-  .tblock-dot.drive{border-color:var(--stone)}
-  .tblock-dot.food{border-color:var(--amber)}
-  .tblock-dot.sleep{border-color:var(--sky-deep)}
-  .tblock-dot.special{border-color:var(--glacier-dark);background:var(--glacier-dark)}
-
-  .card{background:var(--snow);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:box-shadow .2s}
-  .card:hover{box-shadow:0 4px 20px rgba(44,106,144,.1)}
-  .card.drive-card{background:var(--mist);border-color:var(--sky-mid)}
-  .card.food-card{border-color:rgba(212,135,42,.25)}
-  .card.special-card{border-color:var(--sky-deep);box-shadow:0 0 0 1px var(--sky-mid)}
-  .card-head{display:flex;align-items:center;gap:14px;padding:14px 18px;cursor:pointer;user-select:none}
-  .card-icon{font-size:20px;flex-shrink:0;width:32px;text-align:center}
-  .card-head-info{flex:1;min-width:0}
-  .card-time{font-family:'DM Mono',monospace;font-size:11px;color:var(--glacier);letter-spacing:.07em;margin-bottom:2px}
-  .card.drive-card .card-time{color:var(--stone)}
-  .card.food-card .card-time{color:var(--amber)}
-  .card-title{font-family:'Playfair Display',serif;font-size:16px;font-weight:600;color:var(--ink);line-height:1.25}
-  .badge{display:inline-block;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;background:var(--glacier);color:white;border-radius:4px;padding:2px 7px;margin-left:8px;vertical-align:middle}
-  .badge.amber{background:var(--amber)}
-  .card-dur{font-size:11px;color:var(--text-light);margin-left:auto;flex-shrink:0;padding-left:10px;font-weight:300;white-space:nowrap}
-  .card-chevron{font-size:10px;color:var(--stone);transition:transform .25s;flex-shrink:0;margin-left:6px}
-  .card.open .card-chevron{transform:rotate(180deg)}
-  .card-body{display:none;border-top:1px solid var(--border)}
-  .card.food-card .card-body{border-color:rgba(212,135,42,.15)}
-  .card.special-card .card-body{border-color:var(--sky-mid)}
-  .card.open .card-body{display:block}
-  .card-body-inner{padding:16px 18px 16px 64px}
-  .card-desc{font-size:13.5px;line-height:1.78;color:var(--text-mid);margin-bottom:12px;font-weight:300}
-  .card-desc strong{color:var(--ink);font-weight:500}
-
-  .place-spotlight{background:var(--sky);border:1px solid var(--sky-mid);border-radius:10px;padding:14px 16px;margin-bottom:12px}
-  .place-spotlight h4{font-family:'Playfair Display',serif;font-size:15px;font-weight:600;color:var(--glacier-dark);margin-bottom:6px}
-  .place-spotlight p{font-size:13px;color:var(--text-mid);line-height:1.72;font-weight:300}
-
-  .info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin-bottom:12px}
-  .info-box{background:var(--mist);border:1px solid var(--border);border-radius:8px;padding:10px 13px}
-  .info-box-label{font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);margin-bottom:3px}
-  .info-box-val{font-size:13px;color:var(--ink);line-height:1.45;font-weight:400}
-
-  .restaurant-highlight{background:linear-gradient(135deg,var(--sky) 0%,var(--mist-dark) 100%);border:1px solid var(--sky-mid);border-radius:12px;padding:16px;margin-bottom:12px}
-  .restaurant-highlight h4{font-family:'Playfair Display',serif;font-size:17px;font-weight:600;color:var(--ink);margin-bottom:3px}
-  .restaurant-highlight .rest-meta{font-size:12px;color:var(--stone-dark);margin-bottom:10px;font-family:'DM Mono',monospace;letter-spacing:.03em}
-  .restaurant-highlight p{font-size:13px;line-height:1.72;color:var(--text-mid);font-weight:300}
-  .rest-dishes{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-  .rest-dish{background:rgba(255,255,255,.8);border:1px solid var(--border);border-radius:6px;padding:3px 10px;font-size:11px;color:var(--text-mid)}
-
-  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-  .tag{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:400;padding:4px 10px;border-radius:100px;line-height:1}
-  .tag-knee{background:#e8f4fb;color:#2c6a90;border:1px solid #b8d6ed}
-  .tag-tip{background:var(--amber-pale);color:#8a5000;border:1px solid rgba(212,135,42,.3)}
-  .tag-book{background:#fef0f0;color:#8a2020;border:1px solid #f5c0c0}
-  .tag-bday{background:#fdf3e3;color:#8a4a00;border:1px solid rgba(212,135,42,.4)}
-  .tag-note{background:var(--mist);color:var(--slate);border:1px solid var(--border)}
-
-  .section-label{font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--stone);margin-bottom:12px;margin-top:22px;display:flex;align-items:center;gap:10px}
-  .section-label::after{content:'';flex:1;height:1px;background:var(--border)}
-
-  .booking-box{background:var(--sky);border:1px solid var(--sky-mid);border-radius:14px;padding:22px 24px;margin-top:24px}
-  .booking-box h3{font-family:'Playfair Display',serif;font-size:18px;color:var(--ink);margin-bottom:14px}
-  .booking-item{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--sky-mid);font-size:13px;color:var(--text-mid);line-height:1.55;font-weight:300}
-  .booking-item:last-child{border-bottom:none}
-  .booking-item-icon{font-size:16px;flex-shrink:0;margin-top:1px}
-  .booking-item strong{color:var(--ink);font-weight:500;display:block;margin-bottom:1px}
-
-  .practical-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:16px}
-  .practical-item{background:var(--snow);border:1px solid var(--border);border-radius:12px;padding:14px 15px}
-  .practical-icon{font-size:20px;margin-bottom:8px}
-  .practical-title{font-size:12px;font-weight:500;color:var(--ink);margin-bottom:4px}
-  .practical-val{font-size:12px;color:var(--text-light);font-weight:300;line-height:1.55}
-
-  .birthday-banner{background:linear-gradient(135deg,var(--amber-pale) 0%,#fef9f0 100%);border:1px solid rgba(212,135,42,.35);border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:13px;color:#7a4500;display:flex;align-items:center;gap:8px;font-weight:400}
-
-  footer{background:var(--ink);color:var(--stone);text-align:center;padding:28px 20px;font-size:12px;letter-spacing:.05em}
-  footer em{font-style:italic;color:var(--sky-mid);font-family:'Playfair Display',serif;font-size:15px}
-  footer a{color:var(--sky-mid);text-decoration:none}
-
-  @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-  @media(max-width:600px){.card-body-inner{padding:14px}.day-header{flex-direction:column;align-items:flex-start}.info-grid{grid-template-columns:1fr 1fr}.hero h1{font-size:34px}}
-</style>
+<link rel="stylesheet" href="../../css/theme.css">
+<link rel="stylesheet" href="../../css/layout.css">
+<link rel="stylesheet" href="../../css/components.css">
 </head>
 <body>
 
-<!-- FIXED TOP NAV WITH BACK BUTTON -->
 <div class="top-nav">
   <a href="../../index.html" class="back-btn">← All Trips</a>
   <div class="top-nav-title">Banff &amp; <em>Jasper</em> 2025</div>
@@ -235,7 +56,7 @@
 
 <div class="main">
 
-<!-- DAY 1 - RESTORED FROM COMMIT 1ff9684 -->
+<!-- DAY 1: Calgary → Kootenay → Banff (Mom's Birthday) -->
 <div id="d1" class="tab-panel active">
   <div class="day-header">
     <div class="day-header-left"><h2>Calgary &rarr; Kootenay &rarr; <em>Banff</em></h2><p>June 16, 2025 &middot; &#127874; Mom's Birthday &middot; Depart 9:00 AM</p></div>
@@ -278,7 +99,7 @@
   </div>
 </div>
 
-<!-- DAY 2 - RESTORED FROM COMMIT 1ff9684 -->
+<!-- DAY 2: Moraine Lake → Lake Louise → Bow Valley Parkway -->
 <div id="d2" class="tab-panel">
   <div class="day-header"><div class="day-header-left"><h2>Moraine, Louise &amp; <em>Bow Valley</em></h2><p>June 17, 2025 &middot; Moraine Lake &middot; Lake Louise &middot; Bow Valley Pkwy &middot; Johnston Canyon &middot; Depart 7:30 AM</p></div><div class="day-stats"><div class="day-stat"><div class="day-stat-val">~3h</div><div class="day-stat-label">Driving</div></div><div class="day-stat"><div class="day-stat-val">2</div><div class="day-stat-label">Iconic Lakes</div></div><div class="day-stat"><div class="day-stat-val">Early!</div><div class="day-stat-label">Start</div></div></div></div>
   <div class="day-overview">
@@ -298,7 +119,7 @@
     <div class="tblock"><div class="tblock-dot special"></div><div class="card special-card" onclick="toggleCard(this)"><div class="card-head"><div class="card-icon">&#128651;</div><div class="card-head-info"><div class="card-time">8:30 AM</div><div class="card-title">Board Parks Canada Shuttle &rarr; Moraine Lake <span class="badge">Must Book!</span></div></div><div class="card-dur">~30 min ride</div><div class="card-chevron">&#9660;</div></div><div class="card-body"><div class="card-body-inner"><div class="place-spotlight"><h4>Shuttle logistics</h4><p>Arrive P&amp;R by 8:15 AM. Show reservation + Parks Canada pass. Your ticket covers Moraine Lake, the <strong>free Lake Connector</strong> to Lake Louise, and your return. Buses run every 30 min.</p></div><div class="tags"><span class="tag tag-book">&#128197; Book April 15 at 8 AM MDT at reservation.pc.gc.ca &mdash; sells out in minutes</span><span class="tag tag-tip">&#128247; Book the 8:30 AM departure slot</span></div></div></div></div></div>
     <div class="tblock"><div class="tblock-dot special"></div><div class="card special-card" onclick="toggleCard(this)"><div class="card-head"><div class="card-icon">&#128142;</div><div class="card-head-info"><div class="card-time">9:00 AM</div><div class="card-title">Moraine Lake &mdash; Valley of the Ten Peaks</div></div><div class="card-dur">~2 hr 15 min</div><div class="card-chevron">&#9660;</div></div><div class="card-body"><div class="card-body-inner"><div class="place-spotlight"><h4>What is Moraine Lake?</h4><p>A glacially-fed lake in the Valley of the Ten Peaks &mdash; formerly on the Canadian $20 bill. The water is an almost unbelievable electric turquoise. In June the glacial melt is at its peak &mdash; the colour is at its most intense. The single most visually stunning stop of the entire trip.</p></div><p class="card-desc">Walk the <strong>flat lakeshore trail</strong> at your pace. The Rockpile viewpoint is a 5-min boulder scramble &mdash; skip for knees, the lakeshore view is equally stunning. Canoe rental available (~$30 CAD/hr).</p><div class="info-grid"><div class="info-box"><div class="info-box-label">Lakeshore walk</div><div class="info-box-val">Flat, paved, any distance</div></div><div class="info-box"><div class="info-box-label">Canoe rental</div><div class="info-box-val">~$30 CAD/hr at boathouse</div></div><div class="info-box"><div class="info-box-label">Cell service</div><div class="info-box-val">None at Moraine Lake</div></div><div class="info-box"><div class="info-box-label">Facilities</div><div class="info-box-val">Pit toilets at the lake</div></div></div><div class="tags"><span class="tag tag-knee">&#9855; Lakeshore is flat and paved &mdash; fully accessible</span><span class="tag tag-tip">&#128741; Canoe rental &mdash; colour from water level is extraordinary</span></div></div></div></div></div>
     <div class="tblock"><div class="tblock-dot drive"></div><div class="card drive-card" onclick="toggleCard(this)"><div class="card-head"><div class="card-icon">&#128651;</div><div class="card-head-info"><div class="card-time">11:15 AM</div><div class="card-title">Lake Connector Shuttle &rarr; Lake Louise</div></div><div class="card-dur">~20 min ride</div><div class="card-chevron">&#9660;</div></div><div class="card-body"><div class="card-body-inner"><p class="card-desc">Free Lake Connector runs every 30 min &mdash; included in your ticket, first-come first-served. Look for the marked connector stop at the lake.</p></div></div></div></div>
-    <div class="tblock"><div class="tblock-dot star"></div><div class="card special-card" onclick="toggleCard(this)"><div class="card-head"><div class="card-icon">&#127956;</div><div class="card-head-info"><div class="card-time">11:45 AM</div><div class="card-title">Lake Louise</div></div><div class="card-dur">~1 hr 45 min</div><div class="card-chevron">&#9660;</div></div><div class="card-body"><div class="card-body-inner"><div class="place-spotlight"><h4>What is Lake Louise?</h4><p>Perhaps Canada's most famous lake &mdash; glacier-fed, dominated by the massive <strong>Victoria Glacier</strong>, with the <strong>Fairmont Chateau Lake Louise</strong> (built 1890) at its shore. The colour is a distinct teal-turquoise. June means the glacier is still thick with snow and the colour is at its most intense.</p></div><p class="card-desc">Walk the <strong>paved flat lakeshore</strong> as far as comfortable. Stop at the <strong>Fairmont terrace</strong> for a chai or coffee with the glacier view.</p><div class="tags"><span class="tag tag-knee">&#9855; Paved flat lakeshore &mdash; fully accessible</span><span class="tag tag-tip">&#9749; Fairmont terrace &mdash; a chai here is a trip highlight</span></div></div></div></div></div>
+    <div class="tblock"><div class="tblock-dot special"></div><div class="card special-card" onclick="toggleCard(this)"><div class="card-head"><div class="card-icon">&#127956;</div><div class="card-head-info"><div class="card-time">11:45 AM</div><div class="card-title">Lake Louise</div></div><div class="card-dur">~1 hr 45 min</div><div class="card-chevron">&#9660;</div></div><div class="card-body"><div class="card-body-inner"><div class="place-spotlight"><h4>What is Lake Louise?</h4><p>Perhaps Canada's most famous lake &mdash; glacier-fed, dominated by the massive <strong>Victoria Glacier</strong>, with the <strong>Fairmont Chateau Lake Louise</strong> (built 1890) at its shore. The colour is a distinct teal-turquoise. June means the glacier is still thick with snow and the colour is at its most intense.</p></div><p class="card-desc">Walk the <strong>paved flat lakeshore</strong> as far as comfortable. Stop at the <strong>Fairmont terrace</strong> for a chai or coffee with the glacier view.</p><div class="tags"><span class="tag tag-knee">&#9855; Paved flat lakeshore &mdash; fully accessible</span><span class="tag tag-tip">&#9749; Fairmont terrace &mdash; a chai here is a trip highlight</span></div></div></div></div></div>
     <div class="tblock"><div class="tblock-dot food"></div><div class="card food-card" onclick="toggleCard(this)"><div class="card-head"><div class="card-icon">&#129516;</div><div class="card-head-info"><div class="card-time">1:30 PM</div><div class="card-title">Picnic lunch &mdash; packed Indian at Lake Louise lakeshore</div></div><div class="card-dur">~45 min</div><div class="card-chevron">&#9660;</div></div><div class="card-body"><div class="card-body-inner"><p class="card-desc">Benches and grassy areas near the Chateau end of the lake. Eating Indian food with the Victoria Glacier and Fairmont Chateau in the background &mdash; likely the most scenic lunch of your lives.</p><div class="tags"><span class="tag tag-book">&#128203; Must have ordered from Spice Hut on Day 1 evening</span><span class="tag tag-tip">&#129730; Ask for plastic cutlery when ordering the night before</span></div></div></div></div></div>
     <div class="tblock"><div class="tblock-dot drive"></div><div class="card drive-card" onclick="toggleCard(this)"><div class="card-head"><div class="card-icon">&#128663;</div><div class="card-head-info"><div class="card-time">2:15 PM</div><div class="card-title">Return shuttle &rarr; P&amp;R &rarr; Bow Valley Parkway</div></div><div class="card-dur">~30 min shuttle + drive</div><div class="card-chevron">&#9660;</div></div><div class="card-body"><div class="card-body-inner"><p class="card-desc">Board return shuttle from Lake Louise to P&amp;R. Pick up the car, then at <strong>Castle Junction</strong> turn east onto the <strong>Bow Valley Parkway (Hwy 1A)</strong> instead of the Trans-Canada. This is the scenic route home.</p></div></div></div></div>
     <div class="tblock"><div class="tblock-dot special"></div><div class="card special-card" onclick="toggleCard(this)"><div class="card-head"><div class="card-icon">&#127966;</div><div class="card-head-info"><div class="card-time">3:00 PM</div><div class="card-title">Bow Valley Parkway &mdash; Wildlife Scenic Drive</div></div><div class="card-dur">~45 min</div><div class="card-chevron">&#9660;</div></div><div class="card-body"><div class="card-body-inner"><div class="place-spotlight"><h4>What is the Bow Valley Parkway?</h4><p>The original Hwy 1 between Lake Louise and Banff &mdash; 48 km of quieter scenic road. Far more wildlife sightings than the Trans-Canada: <strong>black bears, elk, wolves, bighorn sheep</strong> are regularly spotted in June. <strong>Castle Mountain</strong> &mdash; a dramatically flat-topped peak &mdash; dominates the view throughout. The best road in Banff for wildlife spotting.</p></div><div class="tags"><span class="tag tag-knee">&#9855; Drive-through &mdash; full experience from the car</span><span class="tag tag-tip">&#128059; Pull over any time you see stopped cars ahead &mdash; wildlife sighting</span></div></div></div></div></div>
@@ -315,7 +136,7 @@
   </div>
 </div>
 
-<!-- DAY 3 - RESTORED FROM COMMIT 1ff9684 -->
+<!-- DAY 3: Yoho NP (Takakkaw Falls, Emerald Lake) → Minnewanka -->
 <div id="d3" class="tab-panel">
   <div class="day-header"><div class="day-header-left"><h2>Full <em>Yoho</em> Day &amp; Minnewanka</h2><p>June 18, 2025 &middot; Takakkaw Falls &middot; Emerald Lake &middot; Minnewanka &middot; Depart 9:00 AM</p></div><div class="day-stats"><div class="day-stat"><div class="day-stat-val">373m</div><div class="day-stat-label">Waterfall</div></div><div class="day-stat"><div class="day-stat-val">4</div><div class="day-stat-label">Stops</div></div><div class="day-stat"><div class="day-stat-val">Check</div><div class="day-stat-label">Road Status</div></div></div></div>
   <div class="day-overview">
@@ -359,7 +180,7 @@
   </div>
 </div>
 
-<!-- DAY 4 - UPDATED WITH HINTON ROUTING -->
+<!-- DAY 4: Icefields Parkway (232km) → Hinton -->
 <div id="d4" class="tab-panel">
   <div class="day-header">
     <div class="day-header-left"><h2>Checkout &rarr; <em>Icefields Parkway</em> &rarr; Hinton</h2><p>June 19, 2025 &middot; Bow Lake &middot; Peyto Lake &middot; Full Hwy 93 North &middot; Depart 8:30 AM</p></div>
@@ -401,9 +222,21 @@
   </div>
 </div>
 
-<!-- DAY 5, 6, 7 - RESTORED FROM COMMIT 1ff9684 (truncated in this response for length, but full content would be included) -->
+<!-- DAY 5: Columbia Icefield + Athabasca Falls (content to be added) -->
+<div id="d5" class="tab-panel">
+</div>
 
-<!-- INFO - RESTORED FROM COMMIT 1ff9684 (truncated in this response for length, but full content would be included) -->
+<!-- DAY 6: Jasper + Maligne Lake + Indian food (content to be added) -->
+<div id="d6" class="tab-panel">
+</div>
+
+<!-- DAY 7: Miette Hot Springs → Drumheller → Calgary (content to be added) -->
+<div id="d7" class="tab-panel">
+</div>
+
+<!-- INFO: Essentials, bookings, packing (content to be added) -->
+<div id="info" class="tab-panel">
+</div>
 
 </div><!-- end .main -->
 
@@ -414,19 +247,19 @@
 </footer>
 
 <script>
-function switchTab(id,btn){
-  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   btn.classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-function toggleCard(card){
+function toggleCard(card) {
   card.classList.toggle('open');
 }
-document.querySelectorAll('.tab-panel').forEach(panel=>{
-  const first=panel.querySelector('.card');
-  if(first) first.classList.add('open');
+document.querySelectorAll('.tab-panel').forEach(panel => {
+  const first = panel.querySelector('.card');
+  if (first) first.classList.add('open');
 });
 </script>
 </body>
