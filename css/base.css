@@ -1,0 +1,33 @@
+/* Base styles - shared across all pages */
+
+:root {
+  /* Homepage colors */
+  --cream:    #faf8f5;
+  --warm:     #f2efe9;
+  --border:   #e4e0d8;
+  --stone:    #9a9189;
+  --stone-dk: #6b6059;
+  --ink:      #1a1714;
+  --ink-mid:  #3d3530;
+  --accent:   #c17f4a;
+  --accent-lt:#e8c9a0;
+  --accent-bg:#fdf5eb;
+  --snow:     #ffffff;
+}
+
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+}
+
+body { 
+  font-family: 'DM Sans', sans-serif; 
+  font-weight: 300; 
+  min-height: 100vh; 
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
