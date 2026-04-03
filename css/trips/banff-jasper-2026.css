@@ -5,7 +5,7 @@
     --text-dark:#1a2a35;--text-mid:#3d5a6a;--text-light:#7a9aaa;--border:#ccdde8;
   }
   *{margin:0;padding:0;box-sizing:border-box}
-  body{background:var(--mist);color:var(--text-dark);font-family:'DM Sans',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden}
+  body{background:var(--mist);color:var(--text-dark);font-family:'DM Sans',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden;overflow-anchor:none}
 
   /* TOP NAV WITH BACK BUTTON */
   .top-nav{
