@@ -63,7 +63,7 @@
   .notice-bar{background:var(--amber-pale);border-bottom:1px solid rgba(212,135,42,.25);padding:9px 24px;text-align:center;font-size:12px;color:var(--text-mid)}
   .notice-bar strong{color:var(--amber)}
 
-  .tab-nav-wrap{position:sticky;top:48px;z-index:100;background:var(--snow);border-bottom:1px solid var(--border);box-shadow:0 2px 10px rgba(44,106,144,.07)}
+  .tab-nav-wrap{position:sticky;top:86px;z-index:100;background:var(--snow);border-bottom:1px solid var(--border);box-shadow:0 2px 10px rgba(44,106,144,.07)}
   .tab-nav{display:flex;flex-wrap:wrap;padding:0 16px}
   .tab-btn{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--stone);background:none;border:none;padding:13px 16px 11px;cursor:pointer;white-space:nowrap;transition:color .2s;border-bottom:2px solid transparent;margin-bottom:-1px}
   .tab-btn:hover{color:var(--glacier-dark)}
@@ -207,6 +207,19 @@
   footer{background:var(--ink);color:var(--stone);text-align:center;padding:28px 20px;font-size:12px;letter-spacing:.05em}
   footer em{font-style:italic;color:var(--sky-mid);font-family:'Playfair Display',serif;font-size:15px}
   footer a{color:var(--sky-mid);text-decoration:none}
+
+  /* Countdown pill (dynamic — injected by JS) */
+  .countdown-pill{background:rgba(44,106,144,.12);border:1px solid rgba(44,106,144,.3);color:var(--glacier-dark);font-weight:500}
+  .countdown-pill.active{background:var(--amber-pale);border-color:rgba(212,135,42,.4);color:var(--amber)}
+
+  /* Quick-links bar */
+  .quick-links-bar{position:sticky;top:48px;z-index:99;background:var(--mist-dark);border-bottom:1px solid var(--border);padding:7px 20px;display:flex;align-items:center;gap:7px;flex-wrap:wrap;font-size:12px}
+  .quick-links-label{color:var(--stone);font-weight:500;letter-spacing:.06em;text-transform:uppercase;font-size:10px;flex-shrink:0}
+  .quick-links-divider{width:1px;height:14px;background:var(--border);flex-shrink:0;margin:0 2px}
+  .quick-link{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;background:var(--snow);border:1px solid var(--border);border-radius:100px;color:var(--glacier-dark);text-decoration:none;font-size:11px;font-weight:500;transition:all .15s;white-space:nowrap}
+  .quick-link:hover{background:var(--glacier-dark);color:white;border-color:var(--glacier-dark)}
+  .quick-link:hover .ql-badge{background:rgba(255,255,255,.25);color:white}
+  .ql-badge{background:var(--amber);color:white;border-radius:4px;padding:1px 5px;font-size:9px;font-weight:700;letter-spacing:.03em;margin-left:2px}
 
   /* Callout boxes */
   .callout-warning{background:var(--amber-pale);border:1px solid rgba(212,135,42,.3);border-radius:10px;padding:10px 14px;margin-bottom:16px;font-size:12px;color:#7a4500}

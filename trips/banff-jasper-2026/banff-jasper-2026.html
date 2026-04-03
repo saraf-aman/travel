@@ -7,6 +7,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../css/base.css">
     <link rel="stylesheet" href="../../css/trips/banff-jasper-2026.css">
+    <link rel="manifest" href="../../manifest.json">
+    <meta name="theme-color" content="#2c6a90">
 </head>
 <body>
 
@@ -34,11 +36,27 @@
         <div class="hero-pill"><span>&#128663;</span>Self-drive</div>
         <div class="hero-pill"><span>&#9855;</span>Accessibility-friendly</div>
         <div class="hero-pill"><span>&#127874;</span>Mom's birthday Jun 16</div>
+        <div id="countdown-pill" class="hero-pill countdown-pill"></div>
     </div>
 </div>
 
 <div class="notice-bar">
     <strong>Book before you go:</strong> Moraine Lake Shuttle &middot; Maligne Lake Cruise &middot; Columbia Icefield Ice Explorer &middot; Zyka Banff dinner &middot; Banff Gondola
+    &nbsp;&nbsp;&#9888;&nbsp;<strong>Shuttle reservations open April&nbsp;15 at 8&nbsp;AM MDT &mdash; book the moment they open!</strong>
+</div>
+
+<div class="quick-links-bar">
+    <span class="quick-links-label">Conditions</span>
+    <a href="https://parks.canada.ca/pn-np/bc/yoho" target="_blank" rel="noopener" class="quick-link">&#127956; Yoho</a>
+    <a href="https://parks.canada.ca/pn-np/ab/banff" target="_blank" rel="noopener" class="quick-link">&#127956; Banff</a>
+    <a href="https://clearoutside.com/forecast/52.88/-117.95" target="_blank" rel="noopener" class="quick-link">&#11088; Dark Sky</a>
+    <span class="quick-links-divider"></span>
+    <span class="quick-links-label">Book</span>
+    <a href="https://reservation.pc.gc.ca/" target="_blank" rel="noopener" class="quick-link">&#128651; Shuttle <span class="ql-badge">Apr 15!</span></a>
+    <a href="https://www.malignelake.com/" target="_blank" rel="noopener" class="quick-link">&#9973; Maligne</a>
+    <a href="https://www.banffjaspercollection.com/attractions/columbia-icefield/" target="_blank" rel="noopener" class="quick-link">&#10052; Columbia Icefield</a>
+    <a href="https://www.banffjaspercollection.com/attractions/banff-gondola/" target="_blank" rel="noopener" class="quick-link">&#128673; Gondola</a>
+    <a href="tel:+14039857001" class="quick-link">&#127869; Zyka</a>
 </div>
 
 <div class="tab-nav-wrap">
@@ -498,15 +516,50 @@
 </footer>
 
 <script>
+    // Keep tab-nav-wrap top in sync with actual heights of sticky bars above it
+    function updateTabNavTop(){
+        const topNavH = document.querySelector('.top-nav').offsetHeight;
+        const quickLinksH = document.querySelector('.quick-links-bar').offsetHeight;
+        document.querySelector('.tab-nav-wrap').style.top = (topNavH + quickLinksH) + 'px';
+    }
+    updateTabNavTop();
+    window.addEventListener('resize', updateTabNavTop);
+
     function switchTab(id,btn){
         document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
         document.getElementById(id).classList.add('active');
         btn.classList.add('active');
+        const topNavH = document.querySelector('.top-nav').offsetHeight;
+        const quickLinksH = document.querySelector('.quick-links-bar').offsetHeight;
         const tabWrap = document.querySelector('.tab-nav-wrap');
-        window.scrollTo({top: tabWrap.getBoundingClientRect().top + window.scrollY - 48, behavior:'smooth'});
+        window.scrollTo({top: tabWrap.getBoundingClientRect().top + window.scrollY - topNavH - quickLinksH, behavior:'smooth'});
     }
     document.querySelectorAll('.card-head').forEach(h=>h.addEventListener('click',()=>h.parentElement.classList.toggle('open')));
+
+    // Countdown to Jun 15 flight day
+    (function(){
+        const pill = document.getElementById('countdown-pill');
+        if (!pill) return;
+        const flight = new Date('2026-06-15T00:00:00');
+        const tripEnd = new Date('2026-06-23T00:00:00');
+        const now = new Date();
+        if (now >= tripEnd) { pill.style.display = 'none'; return; }
+        if (now >= flight) {
+            pill.textContent = '\u2708\uFE0F On the trip!';
+            pill.classList.add('active');
+            return;
+        }
+        const days = Math.ceil((flight - now) / 86400000);
+        pill.textContent = '\uD83D\uDDD3 ' + days + ' day' + (days === 1 ? '' : 's') + ' to go';
+    })();
+
+    // Service worker for offline support
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function(){
+            navigator.serviceWorker.register('../../sw.js').catch(function(){});
+        });
+    }
 </script>
 
 </body>
