@@ -503,7 +503,8 @@
         document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
         document.getElementById(id).classList.add('active');
         btn.classList.add('active');
-        window.scrollTo({top:0,behavior:'smooth'});
+        const tabWrap = document.querySelector('.tab-nav-wrap');
+        window.scrollTo({top: tabWrap.getBoundingClientRect().top + window.scrollY - 48, behavior:'smooth'});
     }
     document.querySelectorAll('.card-head').forEach(h=>h.addEventListener('click',()=>h.parentElement.classList.toggle('open')));
 </script>
