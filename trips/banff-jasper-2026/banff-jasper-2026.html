@@ -149,7 +149,7 @@
             <div class="overview-stop"><div class="overview-time">17:00</div><div class="overview-icon">&#127968;</div><div class="overview-name">Canmore<br>Pack bags</div></div>
             <div class="overview-stop"><div class="overview-time">20:00</div><div class="overview-icon">&#127849;</div><div class="overview-name">Final<br>Dinner</div></div>
         </div>
-        <div style="background:var(--amber-pale);border:1px solid rgba(212,135,42,.3);border-radius:10px;padding:10px 14px;margin-bottom:16px;font-size:12px;color:#7a4500;">
+        <div class="callout-warning">
             <strong>&#9888; Check tonight (Jun 17):</strong> Visit parks.canada.ca/yoho &mdash; if Yoho Valley Road is open, follow Plan A below. If closed, scroll to Plan B.
         </div>
         <div class="section-label">Plan A &mdash; Yoho Valley Road open</div>
@@ -164,7 +164,7 @@
             <div class="tblock"><div class="tblock-dot food"></div><div class="card food-card" onclick="toggleCard(this)"><div class="card-head"><div class="card-icon">&#127849;</div><div class="card-head-info"><div class="card-time">8:00 PM</div><div class="card-title">Final Canmore dinner &mdash; Spice Hut</div></div><div class="card-dur">~1.5 hrs</div><div class="card-chevron">&#9660;</div></div><div class="card-body"><div class="card-body-inner"><div class="restaurant-highlight"><h4>Spice Hut Indian Cuisine &mdash; last Canmore dinner</h4><div class="rest-meta">1310 Bow Valley Trail &middot; Open until 10 PM &middot; (403) 609-9997</div><p>Last Indian meal in Canmore before heading north.</p><div class="rest-dishes"><span class="rest-dish">Tandoori Platter</span><span class="rest-dish">Lamb Rogan Josh</span><span class="rest-dish">Chana Masala</span><span class="rest-dish">Garlic Naan</span></div></div><div class="tags"><span class="tag tag-note">No packed lunch needed for Day 4 &mdash; Banff area has Indian restaurants</span></div></div></div></div></div>
         </div>
         <div class="section-label">Plan B &mdash; Yoho Valley Road closed (swap)</div>
-        <div style="background:var(--sky);border:1px solid var(--sky-mid);border-radius:12px;padding:16px 20px;margin-bottom:8px;font-size:13px;color:var(--text-mid);line-height:1.7">
+        <div class="callout-info">
             If the road is closed, start at 9:30 AM instead: <strong>Johnston Canyon</strong> (9:30&ndash;11:30 AM) &rarr; <strong>Spiral Tunnels viewpoint</strong> &rarr; <strong>Picnic lunch Castle Mountain area</strong> &rarr; <strong>Bow Valley Parkway full drive</strong> &rarr; <strong>Lake Minnewanka loop + Hoodoos</strong> (2:30&ndash;4 PM) &rarr; back Canmore by 4:20 PM.
         </div>
         <div class="booking-box">
@@ -318,7 +318,7 @@
             <div class="overview-stop"><div class="overview-time">14:00</div><div class="overview-icon">&#127754;</div><div class="overview-name">Bow<br>Lake</div></div>
             <div class="overview-stop"><div class="overview-time">16:30</div><div class="overview-icon">&#127961;</div><div class="overview-name">Arrive<br>Calgary</div></div>
         </div>
-        <div style="background:var(--sky);border:1px solid var(--sky-mid);border-radius:10px;padding:12px 16px;margin-bottom:20px;font-size:13px;color:var(--text-mid);line-height:1.7">
+        <div class="callout-info">
             <strong>&#127960; Why southbound is different:</strong> You drove this road northbound on Day 4. Southbound you see the opposite faces of every mountain &mdash; different light angles, different perspectives. Experienced travellers consistently say the Parkway is worth driving in both directions. This is not a repeat &mdash; it's a different drive.
         </div>
         <div class="timeline">
@@ -347,47 +347,47 @@
 
     <!-- INFO TAB -->
     <div id="info" class="tab-panel">
-        <h2 style="font-family:'Playfair Display',serif;font-size:28px;margin-bottom:20px">Trip <em>Essentials</em></h2>
+        <h2 class="info-tab-title">Trip <em>Essentials</em></h2>
 
         <div class="section-label">Flights</div>
-        <div class="info-grid" style="grid-template-columns:1fr;gap:14px">
-            <div style="background:var(--snow);border:1px solid var(--border);border-radius:12px;padding:18px">
-                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
-                    <div><h4 style="font-family:'Playfair Display',serif;font-size:17px;color:var(--ink);margin-bottom:4px">New York (JFK) &rarr; Calgary (YYC)</h4><div style="font-size:12px;color:var(--stone);font-family:'DM Mono',monospace">WestJet WS 1681 &middot; Monday, June 15, 2026</div></div>
-                    <div style="text-align:right"><div style="font-size:14px;font-weight:500;color:var(--glacier-dark)">$490.20</div><div style="font-size:10px;color:var(--stone)">all 4 pax</div></div>
+        <div class="info-grid info-grid-single">
+            <div class="detail-card">
+                <div class="detail-card-header">
+                    <div><h4 class="detail-card-h4">New York (JFK) &rarr; Calgary (YYC)</h4><div class="detail-card-meta mono">WestJet WS 1681 &middot; Monday, June 15, 2026</div></div>
+                    <div class="detail-card-price"><div class="detail-card-price-val">$490.20</div><div class="detail-card-price-sub">all 4 pax</div></div>
                 </div>
-                <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:12px;margin-bottom:12px;padding:12px;background:var(--mist);border-radius:8px">
-                    <div><div style="font-size:11px;color:var(--stone);margin-bottom:3px">DEPART</div><div style="font-size:16px;font-weight:600;color:var(--ink)">17:30</div><div style="font-size:11px;color:var(--text-mid)">Terminal 4</div></div>
-                    <div style="color:var(--sky-deep);align-self:center;font-size:20px">&rarr;</div>
-                    <div><div style="font-size:11px;color:var(--stone);margin-bottom:3px">ARRIVE</div><div style="font-size:16px;font-weight:600;color:var(--ink)">21:05</div><div style="font-size:11px;color:var(--text-mid)">YYC</div></div>
+                <div class="flight-times-grid">
+                    <div><div class="flight-time-label">DEPART</div><div class="flight-time-val">17:30</div><div class="flight-time-sub">Terminal 4</div></div>
+                    <div class="flight-arrow">&rarr;</div>
+                    <div><div class="flight-time-label">ARRIVE</div><div class="flight-time-val">21:05</div><div class="flight-time-sub">YYC</div></div>
                 </div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px">
-                    <div style="background:var(--sky);padding:8px 10px;border-radius:6px"><span style="color:var(--stone)">Duration:</span> <strong>5h 35min</strong></div>
-                    <div style="background:var(--sky);padding:8px 10px;border-radius:6px"><span style="color:var(--stone)">Aircraft:</span> <strong>Boeing 737 MAX</strong></div>
+                <div class="detail-pills-grid">
+                    <div class="detail-pill"><span>Duration:</span> <strong>5h 35min</strong></div>
+                    <div class="detail-pill"><span>Aircraft:</span> <strong>Boeing 737 MAX</strong></div>
                 </div>
-                <div style="margin-top:10px;font-size:12px;color:var(--text-mid);line-height:1.6">
-                    <strong style="color:var(--ink)">Booking details:</strong><br>
+                <div class="booking-details-text">
+                    <strong>Booking details:</strong><br>
                     &bull; Aman &amp; Aniket: Seats 19D, 20F ($226.10 incl. seats)<br>
                     &bull; Arvind &amp; Swati: Seats 19E, 19F ($264.10)<br>
                     &bull; Confirmation: LSDJKR (2 separate bookings)
                 </div>
             </div>
-            <div style="background:var(--snow);border:1px solid var(--border);border-radius:12px;padding:18px">
-                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
-                    <div><h4 style="font-family:'Playfair Display',serif;font-size:17px;color:var(--ink);margin-bottom:4px">Calgary (YYC) &rarr; New York (JFK)</h4><div style="font-size:12px;color:var(--stone);font-family:'DM Mono',monospace">Delta DL 6948 &middot; Tuesday, June 23, 2026</div></div>
-                    <div style="text-align:right"><div style="font-size:14px;font-weight:500;color:var(--glacier-dark)">$579.20</div><div style="font-size:10px;color:var(--stone)">all 4 pax</div></div>
+            <div class="detail-card">
+                <div class="detail-card-header">
+                    <div><h4 class="detail-card-h4">Calgary (YYC) &rarr; New York (JFK)</h4><div class="detail-card-meta mono">Delta DL 6948 &middot; Tuesday, June 23, 2026</div></div>
+                    <div class="detail-card-price"><div class="detail-card-price-val">$579.20</div><div class="detail-card-price-sub">all 4 pax</div></div>
                 </div>
-                <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:12px;margin-bottom:12px;padding:12px;background:var(--mist);border-radius:8px">
-                    <div><div style="font-size:11px;color:var(--stone);margin-bottom:3px">DEPART</div><div style="font-size:16px;font-weight:600;color:var(--ink)">09:45</div><div style="font-size:11px;color:var(--text-mid)">YYC</div></div>
-                    <div style="color:var(--sky-deep);align-self:center;font-size:20px">&rarr;</div>
-                    <div><div style="font-size:11px;color:var(--stone);margin-bottom:3px">ARRIVE</div><div style="font-size:16px;font-weight:600;color:var(--ink)">16:35</div><div style="font-size:11px;color:var(--text-mid)">Terminal 4</div></div>
+                <div class="flight-times-grid">
+                    <div><div class="flight-time-label">DEPART</div><div class="flight-time-val">09:45</div><div class="flight-time-sub">YYC</div></div>
+                    <div class="flight-arrow">&rarr;</div>
+                    <div><div class="flight-time-label">ARRIVE</div><div class="flight-time-val">16:35</div><div class="flight-time-sub">Terminal 4</div></div>
                 </div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px">
-                    <div style="background:var(--sky);padding:8px 10px;border-radius:6px"><span style="color:var(--stone)">Duration:</span> <strong>4h 50min</strong></div>
-                    <div style="background:var(--sky);padding:8px 10px;border-radius:6px"><span style="color:var(--stone)">Aircraft:</span> <strong>Boeing 737-800</strong></div>
+                <div class="detail-pills-grid">
+                    <div class="detail-pill"><span>Duration:</span> <strong>4h 50min</strong></div>
+                    <div class="detail-pill"><span>Aircraft:</span> <strong>Boeing 737-800</strong></div>
                 </div>
-                <div style="margin-top:10px;font-size:12px;color:var(--text-mid);line-height:1.6">
-                    <strong style="color:var(--ink)">Booking details:</strong><br>
+                <div class="booking-details-text">
+                    <strong>Booking details:</strong><br>
                     &bull; All 4 passengers: Aniket 20A, Swati 19B, Aman 19A, Arvindkumar 19C<br>
                     &bull; Flight cost: $502.40 + Seats: $76.80 = Total: $579.20<br>
                     &bull; Confirmation: EWEDLQ (single booking)
@@ -396,69 +396,69 @@
         </div>
 
         <div class="section-label">Accommodation</div>
-        <div class="info-grid" style="grid-template-columns:1fr;gap:14px">
-            <div style="background:var(--snow);border:1px solid var(--border);border-radius:12px;padding:18px">
-                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
-                    <div><h4 style="font-family:'Playfair Display',serif;font-size:17px;color:var(--ink);margin-bottom:2px">Hotel 11, MOD A Sonesta Collection</h4><div style="font-size:12px;color:var(--stone)">11 Freeport Cres NE, Calgary, AB</div></div>
-                    <div style="text-align:right"><div style="font-size:14px;font-weight:500;color:var(--glacier-dark)">$70</div><div style="font-size:10px;color:var(--stone)">1 night</div></div>
+        <div class="info-grid info-grid-single">
+            <div class="detail-card">
+                <div class="detail-card-header">
+                    <div><h4 class="detail-card-h4">Hotel 11, MOD A Sonesta Collection</h4><div class="detail-card-meta">11 Freeport Cres NE, Calgary, AB</div></div>
+                    <div class="detail-card-price"><div class="detail-card-price-val">$70</div><div class="detail-card-price-sub">1 night</div></div>
                 </div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;font-size:12px">
-                    <div style="background:var(--mist);padding:8px 10px;border-radius:6px"><span style="color:var(--stone)">Check-in:</span> <strong>Mon Jun 15, 4:00 PM</strong></div>
-                    <div style="background:var(--mist);padding:8px 10px;border-radius:6px"><span style="color:var(--stone)">Checkout:</span> <strong>Tue Jun 16, 11:00 AM</strong></div>
+                <div class="checkin-pills-grid">
+                    <div class="checkin-pill"><span>Check-in:</span> <strong>Mon Jun 15, 4:00 PM</strong></div>
+                    <div class="checkin-pill"><span>Checkout:</span> <strong>Tue Jun 16, 11:00 AM</strong></div>
                 </div>
-                <div style="font-size:12px;color:var(--text-mid)"><strong style="color:var(--ink)">Room:</strong> 2 Queen beds &middot; 1 night, 4 guests</div>
+                <div class="detail-note"><strong>Room:</strong> 2 Queen beds &middot; 1 night, 4 guests</div>
             </div>
-            <div style="background:var(--snow);border:1px solid var(--border);border-radius:12px;padding:18px">
-                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
-                    <div><h4 style="font-family:'Playfair Display',serif;font-size:17px;color:var(--ink);margin-bottom:2px">Mountain View Inn</h4><div style="font-size:12px;color:var(--stone)">100 Kananaskis Way, Canmore, AB</div></div>
-                    <div style="text-align:right"><div style="font-size:14px;font-weight:500;color:var(--glacier-dark)">$718</div><div style="font-size:10px;color:var(--stone)">3 nights</div></div>
+            <div class="detail-card">
+                <div class="detail-card-header">
+                    <div><h4 class="detail-card-h4">Mountain View Inn</h4><div class="detail-card-meta">100 Kananaskis Way, Canmore, AB</div></div>
+                    <div class="detail-card-price"><div class="detail-card-price-val">$718</div><div class="detail-card-price-sub">3 nights</div></div>
                 </div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;font-size:12px">
-                    <div style="background:var(--mist);padding:8px 10px;border-radius:6px"><span style="color:var(--stone)">Check-in:</span> <strong>Tue Jun 16, 4:00 PM</strong></div>
-                    <div style="background:var(--mist);padding:8px 10px;border-radius:6px"><span style="color:var(--stone)">Checkout:</span> <strong>Fri Jun 19, 11:00 AM</strong></div>
+                <div class="checkin-pills-grid">
+                    <div class="checkin-pill"><span>Check-in:</span> <strong>Tue Jun 16, 4:00 PM</strong></div>
+                    <div class="checkin-pill"><span>Checkout:</span> <strong>Fri Jun 19, 11:00 AM</strong></div>
                 </div>
-                <div style="font-size:12px;color:var(--text-mid)"><strong style="color:var(--ink)">Room:</strong> Economy Queen &middot; 3 nights, 4 guests &middot; Must be 18+ to check in</div>
+                <div class="detail-note"><strong>Room:</strong> Economy Queen &middot; 3 nights, 4 guests &middot; Must be 18+ to check in</div>
             </div>
-            <div style="background:var(--snow);border:1px solid var(--border);border-radius:12px;padding:18px">
-                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
-                    <div><h4 style="font-family:'Playfair Display',serif;font-size:17px;color:var(--ink);margin-bottom:2px">Hinton Hotel (TBC)</h4><div style="font-size:12px;color:var(--stone)">Hinton, AB &mdash; book before trip</div></div>
-                    <div style="text-align:right"><div style="font-size:14px;font-weight:500;color:var(--glacier-dark)">TBC</div><div style="font-size:10px;color:var(--stone)">3 nights</div></div>
+            <div class="detail-card">
+                <div class="detail-card-header">
+                    <div><h4 class="detail-card-h4">Hinton Hotel (TBC)</h4><div class="detail-card-meta">Hinton, AB &mdash; book before trip</div></div>
+                    <div class="detail-card-price"><div class="detail-card-price-val">TBC</div><div class="detail-card-price-sub">3 nights</div></div>
                 </div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;font-size:12px">
-                    <div style="background:var(--mist);padding:8px 10px;border-radius:6px"><span style="color:var(--stone)">Check-in:</span> <strong>Fri Jun 19</strong></div>
-                    <div style="background:var(--mist);padding:8px 10px;border-radius:6px"><span style="color:var(--stone)">Checkout:</span> <strong>Mon Jun 22</strong></div>
+                <div class="checkin-pills-grid">
+                    <div class="checkin-pill"><span>Check-in:</span> <strong>Fri Jun 19</strong></div>
+                    <div class="checkin-pill"><span>Checkout:</span> <strong>Mon Jun 22</strong></div>
                 </div>
-                <div style="font-size:12px;color:var(--text-mid)"><strong style="color:var(--ink)">Options:</strong> Best Western Plus, Holiday Inn Express, Days Inn &middot; 3 nights, 4 guests</div>
+                <div class="detail-note"><strong>Options:</strong> Best Western Plus, Holiday Inn Express, Days Inn &middot; 3 nights, 4 guests</div>
             </div>
-            <div style="background:var(--snow);border:1px solid var(--border);border-radius:12px;padding:18px">
-                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
-                    <div><h4 style="font-family:'Playfair Display',serif;font-size:17px;color:var(--ink);margin-bottom:2px">Calgary Airport Hotel (TBC)</h4><div style="font-size:12px;color:var(--stone)">Near YYC airport &mdash; book before trip</div></div>
-                    <div style="text-align:right"><div style="font-size:14px;font-weight:500;color:var(--glacier-dark)">TBC</div><div style="font-size:10px;color:var(--stone)">1 night</div></div>
+            <div class="detail-card">
+                <div class="detail-card-header">
+                    <div><h4 class="detail-card-h4">Calgary Airport Hotel (TBC)</h4><div class="detail-card-meta">Near YYC airport &mdash; book before trip</div></div>
+                    <div class="detail-card-price"><div class="detail-card-price-val">TBC</div><div class="detail-card-price-sub">1 night</div></div>
                 </div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;font-size:12px">
-                    <div style="background:var(--mist);padding:8px 10px;border-radius:6px"><span style="color:var(--stone)">Check-in:</span> <strong>Mon Jun 22</strong></div>
-                    <div style="background:var(--mist);padding:8px 10px;border-radius:6px"><span style="color:var(--stone)">Checkout:</span> <strong>Tue Jun 23, early</strong></div>
+                <div class="checkin-pills-grid">
+                    <div class="checkin-pill"><span>Check-in:</span> <strong>Mon Jun 22</strong></div>
+                    <div class="checkin-pill"><span>Checkout:</span> <strong>Tue Jun 23, early</strong></div>
                 </div>
-                <div style="font-size:12px;color:var(--text-mid)"><strong style="color:var(--ink)">Options:</strong> Marriott Calgary Airport, Delta Hotels YYC, Acclaim Hotel &middot; Must be 5 min from terminal</div>
+                <div class="detail-note"><strong>Options:</strong> Marriott Calgary Airport, Delta Hotels YYC, Acclaim Hotel &middot; Must be 5 min from terminal</div>
             </div>
         </div>
 
         <div class="section-label">Transportation</div>
-        <div style="background:var(--snow);border:1px solid var(--border);border-radius:12px;padding:18px">
-            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
-                <div><h4 style="font-family:'Playfair Display',serif;font-size:17px;color:var(--ink);margin-bottom:4px">Enterprise Car Rental</h4><div style="font-size:12px;color:var(--stone);font-family:'DM Mono',monospace">Confirmation: 2102686342</div></div>
-                <div style="text-align:right"><div style="font-size:14px;font-weight:500;color:var(--glacier-dark)">$893.20 CAD</div><div style="font-size:10px;color:var(--stone)">8 days</div></div>
+        <div class="detail-card">
+            <div class="detail-card-header">
+                <div><h4 class="detail-card-h4">Enterprise Car Rental</h4><div class="detail-card-meta mono">Confirmation: 2102686342</div></div>
+                <div class="detail-card-price"><div class="detail-card-price-val">$893.20 CAD</div><div class="detail-card-price-sub">8 days</div></div>
             </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;font-size:12px">
-                <div style="background:var(--mist);padding:8px 10px;border-radius:6px"><span style="color:var(--stone)">Pick-up:</span> <strong>Tue Jun 16, 7:00 AM</strong></div>
-                <div style="background:var(--mist);padding:8px 10px;border-radius:6px"><span style="color:var(--stone)">Return:</span> <strong>Tue Jun 23, 7:00 AM</strong></div>
+            <div class="checkin-pills-grid">
+                <div class="checkin-pill"><span>Pick-up:</span> <strong>Tue Jun 16, 7:00 AM</strong></div>
+                <div class="checkin-pill"><span>Return:</span> <strong>Tue Jun 23, 7:00 AM</strong></div>
             </div>
-            <div style="background:var(--sky);padding:12px;border-radius:8px;margin-bottom:10px">
-                <div style="font-size:13px;color:var(--ink);margin-bottom:6px"><strong>Premium Elite SUV</strong></div>
-                <div style="font-size:12px;color:var(--text-mid)">Mercedes-Benz GLC, Audi Q5, BMW X3 or similar &middot; Automatic &middot; Unlimited Mileage</div>
+            <div class="car-highlight">
+                <div class="car-highlight-title"><strong>Premium Elite SUV</strong></div>
+                <div class="car-highlight-detail">Mercedes-Benz GLC, Audi Q5, BMW X3 or similar &middot; Automatic &middot; Unlimited Mileage</div>
             </div>
-            <div style="font-size:12px;color:var(--text-mid);line-height:1.6">
-                <strong style="color:var(--ink)">Driver:</strong> Aman Saraf &middot; <strong style="color:var(--ink)">Flight:</strong> WestJet 1681 &middot; <strong style="color:var(--ink)">Location:</strong> Calgary International Airport
+            <div class="driver-details">
+                <strong>Driver:</strong> Aman Saraf &middot; <strong>Flight:</strong> WestJet 1681 &middot; <strong>Location:</strong> Calgary International Airport
             </div>
         </div>
 
@@ -475,17 +475,17 @@
         </div>
 
         <div class="section-label">Budget Summary</div>
-        <div style="background:var(--glacier-dark);color:white;border-radius:14px;padding:20px">
-            <div style="font-family:'Playfair Display',serif;font-size:20px;margin-bottom:16px">Total Trip Cost</div>
-            <div style="display:grid;grid-template-columns:1fr auto;gap:10px;font-size:13px">
-                <div>Flights (all 4)</div><div style="text-align:right;font-weight:500">$1,069.40</div>
-                <div>Accommodation (4 nights booked)</div><div style="text-align:right;font-weight:500">$788.00</div>
-                <div>Car Rental (8 days)</div><div style="text-align:right;font-weight:500">~$640 USD</div>
-                <div style="opacity:.7">Food &amp; Activities (est.)</div><div style="text-align:right;opacity:.7">~$800</div>
-                <div style="padding-top:10px;border-top:1px solid rgba(255,255,255,.3);font-size:16px;font-weight:600">Estimated Total</div>
-                <div style="padding-top:10px;border-top:1px solid rgba(255,255,255,.3);font-size:18px;font-weight:700;text-align:right">~$3,330 USD</div>
+        <div class="budget-card">
+            <div class="budget-card-title">Total Trip Cost</div>
+            <div class="budget-grid">
+                <div>Flights (all 4)</div><div class="budget-row-right">$1,069.40</div>
+                <div>Accommodation (4 nights booked)</div><div class="budget-row-right">$788.00</div>
+                <div>Car Rental (8 days)</div><div class="budget-row-right">~$640 USD</div>
+                <div class="budget-row-muted">Food &amp; Activities (est.)</div><div class="budget-row-muted-right">~$800</div>
+                <div class="budget-total-label">Estimated Total</div>
+                <div class="budget-total-val">~$3,330 USD</div>
             </div>
-            <div style="margin-top:12px;font-size:11px;opacity:.7">Per person: ~$787 USD &middot; Excludes optional activities &amp; souvenirs</div>
+            <div class="budget-footer">Per person: ~$787 USD &middot; Excludes optional activities &amp; souvenirs</div>
         </div>
     </div>
 
@@ -493,8 +493,8 @@
 
 <footer>
     <em>Banff &amp; Jasper &middot; Family Trip &middot; June 2026</em>
-    <div style="margin-top:8px;font-size:11px;opacity:.6">Have an incredible journey &mdash; the mountains will take your breath away.</div>
-    <div style="margin-top:8px"><a href="../../index.html">← Back to all trips</a></div>
+    <div class="footer-sub">Have an incredible journey &mdash; the mountains will take your breath away.</div>
+    <div class="footer-back"><a href="../../index.html">← Back to all trips</a></div>
 </footer>
 
 <script>
