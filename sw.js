@@ -1,10 +1,9 @@
-const CACHE = 'banff-trip-v1';
+const CACHE = 'travel-v1';
 
+// Only the bare minimum needed offline before a first visit.
+// Everything else gets cached automatically on first fetch (see fetch handler below).
 const PRECACHE = [
   '/travel/',
-  '/travel/trips/banff-jasper-2026/banff-jasper-2026.html',
-  '/travel/css/base.css',
-  '/travel/css/trips/banff-jasper-2026.css',
 ];
 
 self.addEventListener('install', e => {
