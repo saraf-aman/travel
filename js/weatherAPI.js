@@ -21,7 +21,7 @@ const TripWeather = (() => {
   const SHOW_HOURS   = [5, 7, 10, 13, 16, 19, 21, 23]; // 7 am → 7 pm, five snapshots
 
   // ── TRIP DATES (change both lines for testing) ───────────────────────────
-  const TRIP_DATES = ['2026-04-13','2026-04-14','2026-04-15','2026-04-16','2026-04-17','2026-04-18','2026-04-19'];
+  const TRIP_DATES = ['2026-06-16','2026-06-17','2026-06-18','2026-06-19','2026-06-20','2026-06-21','2026-06-22'];
   // ────────────────────────────────────────────────────────────────────────
 
   // Locations shown per day. Multiple per day capture real temp variation
