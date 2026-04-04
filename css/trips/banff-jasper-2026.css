@@ -290,4 +290,104 @@
     .overview-time{font-size:10px}
     .tab-nav{padding:0 12px}
     .top-nav{padding:0 16px}
+    .ws-block{gap:8px;padding:9px 14px}
+    .ws-label{font-size:9.5px}
+    .ws-meta{font-size:11px}
   }
+
+  /* ── WEATHER STRIP (top — trip day hourly) ─────────────────── */
+  .weather-strip {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(90deg, #e2f0f9 0%, #eef6fb 100%);
+    border: 1px solid var(--sky-mid);
+    border-radius: 10px;
+    margin-bottom: 22px;
+    overflow-x: auto;
+    min-height: 54px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .weather-strip::-webkit-scrollbar { display: none; }
+  .weather-strip:empty::after {
+    content: '\26C5\A0 Loading weather\2026';
+    padding: 0 18px;
+    font-size: 12px;
+    color: var(--stone-dark);
+    font-style: italic;
+  }
+  .ws-block {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 18px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .ws-label {
+    font-size: 10.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--glacier-dark);
+  }
+  .ws-hours { display: flex; gap: 6px; }
+  .ws-hour  { display: flex; flex-direction: column; align-items: center; gap: 2px; min-width: 30px; }
+  .ws-htime { font-size: 9.5px; color: var(--stone-dark); }
+  .ws-htemp { font-size: 13px; font-weight: 600; color: var(--text-dark); }
+  .ws-hi    { color: var(--amber); }
+  .ws-lo    { color: var(--stone-dark); }
+  .ws-meta  { font-size: 12px; color: var(--text-mid); }
+  .ws-div   { width: 1px; height: 36px; background: var(--sky-mid); flex-shrink: 0; }
+  .ws-na    { padding: 0 18px; font-size: 12px; color: var(--stone-dark); font-style: italic; }
+
+  /* ── PLANNING GRID (bottom — next 3 days) ───────────────────── */
+  .weather-planning { margin: 24px 0 28px; }
+  .wp-grid {
+    border: 1px solid var(--sky-mid);
+    border-radius: 10px;
+    overflow: hidden;
+    background: linear-gradient(90deg, #e2f0f9, #eef6fb);
+    font-size: 12px;
+  }
+  .wp-head {
+    display: grid;
+    grid-template-columns: minmax(110px, 1.5fr) repeat(3, 1fr);
+    background: rgba(44,106,144,.08);
+    border-bottom: 1px solid var(--sky-mid);
+    padding: 8px 16px;
+    gap: 4px;
+    align-items: center;
+  }
+  .wp-row {
+    display: grid;
+    grid-template-columns: minmax(110px, 1.5fr) repeat(3, 1fr);
+    padding: 7px 16px;
+    border-bottom: 1px solid rgba(184,214,237,.5);
+    align-items: center;
+    gap: 4px;
+  }
+  .wp-row:last-child { border-bottom: none; }
+  .wp-rowlabel {
+    font-size: 10.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--glacier-dark);
+  }
+  .wp-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--glacier-dark);
+    text-align: center;
+  }
+  .wp-temps { font-size: 12px; font-weight: 500; }
+  .wp-hi    { color: var(--amber); }
+  .wp-lo    { color: var(--stone-dark); }
+  .wp-slash { color: var(--stone); margin: 0 1px; }
+  .wp-rain  { font-size: 10px; color: var(--stone-dark); }
+  .wp-empty { color: var(--stone); }
