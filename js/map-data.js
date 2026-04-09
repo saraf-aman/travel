@@ -106,6 +106,7 @@ const TRIP_MAP_DATA = (() => {
       [51.1830,-116.1310], // Marble Canyon
       [51.1560,-116.1080], // Paint Pots
       [51.2150,-115.9900], // back to Castle Junction
+      [51.1930,-115.6150], // Vermilion Lakes
       [51.1784,-115.5708], // Banff
       [51.1650,-115.5540], // Gondola
       [51.1770,-115.5700], // Zyka
