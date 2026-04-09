@@ -22,7 +22,22 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
-  // Skip cross-origin (Google Fonts etc) — let them load normally or fail gracefully
+
+  // Cache OSM map tiles (cross-origin) with cache-first strategy
+  if (e.request.url.startsWith('https://tile.openstreetmap.org/')) {
+    e.respondWith(
+      caches.match(e.request).then(cached => {
+        if (cached) return cached;
+        return fetch(e.request).then(res => {
+          if (res.ok) caches.open(CACHE).then(c => c.put(e.request, res.clone()));
+          return res;
+        }).catch(() => cached);
+      })
+    );
+    return;
+  }
+
+  // Skip other cross-origin (Google Fonts etc) — let them load normally or fail gracefully
   if (!e.request.url.startsWith(self.location.origin)) return;
 
   const isDoc = e.request.destination === 'document';

@@ -7,7 +7,7 @@
     <script>if(localStorage.getItem('travel-theme')==='dark')document.documentElement.setAttribute('data-theme','dark');</script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../css/base.css?v=8b39bc24">
-    <link rel="stylesheet" href="../../css/trips/banff-jasper-2026.css?v=361ca360">
+    <link rel="stylesheet" href="../../css/trips/banff-jasper-2026.css?v=d0f5118a">
     <link rel="manifest" href="../../manifest.json">
     <meta name="theme-color" content="#2c6a90">
     <script src="../../js/darkmode.js?v=2d9d6915" defer></script>
@@ -51,6 +51,7 @@
         <button class="tab-btn" onclick="switchTab('d5',this)"><span class="day-num">Day 5</span><span class="day-date">Jun 20</span></button>
         <button class="tab-btn" onclick="switchTab('d6',this)"><span class="day-num">Day 6</span><span class="day-date">Jun 21</span></button>
         <button class="tab-btn" onclick="switchTab('d7',this)"><span class="day-num">Day 7</span><span class="day-date">Jun 22</span></button>
+        <button class="tab-btn" onclick="switchTab('map',this)"><span class="day-num">Map</span><span class="day-date">Route</span></button>
         <button class="tab-btn" onclick="switchTab('info',this)"><span class="day-num">Info</span><span class="day-date">Essentials</span></button>
     </div>
 </div>
@@ -370,6 +371,22 @@
         </div>
     </div>
 
+    <!-- MAP TAB -->
+    <div id="map" class="tab-panel">
+        <div class="map-filter">
+            <button id="map-filter-all" class="map-filter-btn active">All Days</button>
+            <button id="map-filter-d1" class="map-filter-btn">D1</button>
+            <button id="map-filter-d2" class="map-filter-btn">D2</button>
+            <button id="map-filter-d3" class="map-filter-btn">D3</button>
+            <button id="map-filter-d4" class="map-filter-btn">D4</button>
+            <button id="map-filter-d5" class="map-filter-btn">D5</button>
+            <button id="map-filter-d6" class="map-filter-btn">D6</button>
+            <button id="map-filter-d7" class="map-filter-btn">D7</button>
+        </div>
+        <div id="trip-map"></div>
+        <div id="map-cache-status"></div>
+    </div>
+
     <!-- INFO TAB -->
     <div id="info" class="tab-panel">
         <h2 class="info-tab-title">Trip <em>Essentials</em></h2>
@@ -653,6 +670,19 @@
 
 </div><!-- end .main -->
 
+<!-- MAP BOTTOM SHEET (fixed overlay) -->
+<div id="map-sheet" class="map-sheet" role="dialog" aria-label="Stop details">
+    <div class="map-sheet-handle"></div>
+    <button class="map-sheet-close" aria-label="Close">✕</button>
+    <div class="map-sheet-name"></div>
+    <div class="map-sheet-meta">
+        <span class="map-sheet-day"></span>
+        <span class="map-sheet-type"></span>
+    </div>
+    <div class="map-sheet-note"></div>
+    <a class="map-sheet-link" href="#">Go to Day itinerary →</a>
+</div>
+
 <footer>
     <em>Banff &amp; Jasper &middot; Family Trip &middot; June 2026</em>
     <div class="footer-sub">Have an incredible journey &mdash; the mountains will take your breath away.</div>
@@ -677,7 +707,9 @@
         const stickyH = document.querySelector('.top-nav').offsetHeight
                       + document.querySelector('.tab-nav-wrap').offsetHeight;
         window.scrollTo({top: document.querySelector('.main').offsetTop - stickyH, behavior:'smooth'});
+        if (id === 'map' && window.TripMap) TripMap.activate();
     }
+    window.switchTab = switchTab;
 
     // Restore tab from URL hash on load (no scroll jump)
     (function(){
@@ -689,6 +721,7 @@
         document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
         document.getElementById(id).classList.add('active');
         btn.classList.add('active');
+        if (id === 'map') setTimeout(function(){ if (window.TripMap) TripMap.activate(); }, 150);
     })();
     document.querySelectorAll('.card-head').forEach(h=>h.addEventListener('click',()=>h.parentElement.classList.toggle('open')));
 
@@ -753,6 +786,8 @@
 </script>
 <script src="../../js/weatherAPI.js?v=d27b3b3a"></script>
 <script>TripWeather.load().catch(() => {});</script>
+<script src="../../js/map-data.js?v=8d71bb39"></script>
+<script src="../../js/map.js?v=5e5b13b6"></script>
 
 </body>
 </html>
