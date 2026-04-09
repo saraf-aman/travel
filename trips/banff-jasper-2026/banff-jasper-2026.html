@@ -7,7 +7,7 @@
     <script>if(localStorage.getItem('travel-theme')==='dark')document.documentElement.setAttribute('data-theme','dark');</script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../css/base.css?v=8b39bc24">
-    <link rel="stylesheet" href="../../css/trips/banff-jasper-2026.css?v=8562c5b7">
+    <link rel="stylesheet" href="../../css/trips/banff-jasper-2026.css?v=c837ca6f">
     <link rel="manifest" href="../../manifest.json">
     <meta name="theme-color" content="#2c6a90">
     <script src="../../js/darkmode.js?v=2d9d6915" defer></script>
@@ -505,16 +505,127 @@
             </div>
         </div>
 
-        <div class="booking-box">
-            <h3>&#128203; Book Before You Go</h3>
-            <div class="booking-item"><div class="booking-item-icon">&#128651;</div><div><strong>Moraine Lake Shuttle &mdash; Apr 15 at 8 AM MDT sharp</strong>reservation.pc.gc.ca &mdash; set up account now. Book 8:30 AM slot for Jun 17. Sells out in minutes.</div></div>
-            <div class="booking-item"><div class="booking-item-icon">&#10052;</div><div><strong>Columbia Icefield Ice Explorer</strong>explorerockies.com &mdash; book 9:30 AM slot for Jun 20. Fills up in summer.</div></div>
-            <div class="booking-item"><div class="booking-item-icon">&#9973;</div><div><strong>Maligne Lake Spirit Island Cruise</strong>malignelake.com &mdash; book noon departure for Jun 21. Can sell out weeks ahead.</div></div>
-            <div class="booking-item"><div class="booking-item-icon">&#127874;</div><div><strong>Zyka Birthday Dinner</strong>Call (403) 985-7001. Request window table. Mention birthday.</div></div>
-            <div class="booking-item"><div class="booking-item-icon">&#128673;</div><div><strong>Banff Gondola</strong>banffjaspercollection.com &mdash; book ~4:00 PM slot for Jun 16.</div></div>
-            <div class="booking-item"><div class="booking-item-icon">&#127968;</div><div><strong>Hinton hotel &mdash; 3 nights Jun 19&ndash;21</strong>Best Western Plus, Holiday Inn Express, or Days Inn. Book ahead.</div></div>
-            <div class="booking-item"><div class="booking-item-icon">&#127961;</div><div><strong>Calgary airport hotel &mdash; Jun 22</strong>Marriott Calgary Airport, Delta Hotels YYC, or Acclaim Hotel. Must be near YYC.</div></div>
-            <div class="booking-item"><div class="booking-item-icon">&#127830;</div><div><strong>Calgary farewell dinner &mdash; Jun 22</strong>Caesar's Steakhouse or The Keg &mdash; reserve for 7:30 PM.</div></div>
+        <div class="booking-checklist">
+            <div class="checklist-header-top">
+                <h3>&#128203; Booking Checklist</h3>
+                <button class="checklist-reset-btn" onclick="resetChecklist()">Reset all</button>
+            </div>
+            <div class="checklist-progress-wrap">
+                <div class="checklist-progress-bar"><div class="checklist-progress-fill" id="cl-fill"></div></div>
+                <div class="checklist-progress-text" id="cl-text">0 of 14 complete</div>
+            </div>
+            <div class="cl-item" data-id="parks-account" onclick="toggleClItem(this)">
+                <input type="checkbox" aria-hidden="true"><div class="cl-check">&#10003;</div>
+                <div class="cl-emoji">&#127963;</div>
+                <div class="cl-body">
+                    <div class="cl-title"><strong>Parks Canada account setup</strong><span class="cl-badge urgent">Do Now</span></div>
+                    <div class="cl-detail">reservation.pc.gc.ca &mdash; must be created before Apr 15 to book the Moraine Lake shuttle</div>
+                </div>
+            </div>
+            <div class="cl-item" data-id="moraine-shuttle" onclick="toggleClItem(this)">
+                <input type="checkbox" aria-hidden="true"><div class="cl-check">&#10003;</div>
+                <div class="cl-emoji">&#128651;</div>
+                <div class="cl-body">
+                    <div class="cl-title"><strong>Moraine Lake Shuttle &mdash; Jun 17</strong><span class="cl-badge urgent">Apr 15 at 8 AM MDT</span></div>
+                    <div class="cl-detail">reservation.pc.gc.ca &mdash; book 8:30 AM slot. Sells out in minutes.</div>
+                </div>
+            </div>
+            <div class="cl-item" data-id="flight-out" onclick="toggleClItem(this)">
+                <input type="checkbox" aria-hidden="true"><div class="cl-check">&#10003;</div>
+                <div class="cl-emoji">&#9992;&#65039;</div>
+                <div class="cl-body">
+                    <div class="cl-title"><strong>Outbound flight &mdash; Jun 15</strong><span class="cl-badge booked">Booked</span></div>
+                    <div class="cl-detail">WestJet WS 1681 &middot; JFK&rarr;YYC &middot; 17:30&ndash;21:05 &middot; Conf: LSDJKR</div>
+                </div>
+            </div>
+            <div class="cl-item" data-id="calgary-hotel-15" onclick="toggleClItem(this)">
+                <input type="checkbox" aria-hidden="true"><div class="cl-check">&#10003;</div>
+                <div class="cl-emoji">&#127968;</div>
+                <div class="cl-body">
+                    <div class="cl-title"><strong>Calgary hotel &mdash; Jun 15</strong><span class="cl-badge booked">Booked</span></div>
+                    <div class="cl-detail">Hotel 11, MOD A Sonesta Collection &middot; 11 Freeport Cres NE &middot; Check-in 4:00 PM</div>
+                </div>
+            </div>
+            <div class="cl-item" data-id="discovery-pass" onclick="toggleClItem(this)">
+                <input type="checkbox" aria-hidden="true"><div class="cl-check">&#10003;</div>
+                <div class="cl-emoji">&#127956;</div>
+                <div class="cl-body">
+                    <div class="cl-title"><strong>Parks Canada Discovery Pass</strong></div>
+                    <div class="cl-detail">CAD $167.50/family &mdash; covers all national parks on the trip. Buy online at pc.gc.ca or at the first park gate on Day 1.</div>
+                </div>
+            </div>
+            <div class="cl-item" data-id="banff-hotel" onclick="toggleClItem(this)">
+                <input type="checkbox" aria-hidden="true"><div class="cl-check">&#10003;</div>
+                <div class="cl-emoji">&#127968;</div>
+                <div class="cl-body">
+                    <div class="cl-title"><strong>Canmore hotel &mdash; 3 nights Jun 16&ndash;18</strong><span class="cl-badge booked">Booked</span></div>
+                    <div class="cl-detail">Mountain View Inn &middot; 100 Kananaskis Way, Canmore &middot; Check-in before 10 PM</div>
+                </div>
+            </div>
+            <div class="cl-item" data-id="gondola" onclick="toggleClItem(this)">
+                <input type="checkbox" aria-hidden="true"><div class="cl-check">&#10003;</div>
+                <div class="cl-emoji">&#128673;</div>
+                <div class="cl-body">
+                    <div class="cl-title"><strong>Banff Gondola &mdash; Jun 16</strong></div>
+                    <div class="cl-detail">banffjaspercollection.com &mdash; book ~4:00 PM slot.</div>
+                </div>
+            </div>
+            <div class="cl-item" data-id="zyka" onclick="toggleClItem(this)">
+                <input type="checkbox" aria-hidden="true"><div class="cl-check">&#10003;</div>
+                <div class="cl-emoji">&#127874;</div>
+                <div class="cl-body">
+                    <div class="cl-title"><strong>Zyka Birthday Dinner &mdash; Jun 16</strong></div>
+                    <div class="cl-detail">Call (403) 985-7001 &mdash; request window table. Mention birthday.</div>
+                </div>
+            </div>
+            <div class="cl-item" data-id="hinton-hotel" onclick="toggleClItem(this)">
+                <input type="checkbox" aria-hidden="true"><div class="cl-check">&#10003;</div>
+                <div class="cl-emoji">&#127968;</div>
+                <div class="cl-body">
+                    <div class="cl-title"><strong>Hinton hotel &mdash; 3 nights Jun 19&ndash;21</strong><span class="cl-badge booked">Booked</span></div>
+                    <div class="cl-detail">Coast Hinton Hotel, 571 Gregg Ave &mdash; confirmation on file.</div>
+                </div>
+            </div>
+            <div class="cl-item" data-id="ice-explorer" onclick="toggleClItem(this)">
+                <input type="checkbox" aria-hidden="true"><div class="cl-check">&#10003;</div>
+                <div class="cl-emoji">&#10052;&#65039;</div>
+                <div class="cl-body">
+                    <div class="cl-title"><strong>Columbia Icefield Ice Explorer &mdash; Jun 20</strong></div>
+                    <div class="cl-detail">explorerockies.com &mdash; book 9:30 AM slot. Fills up in summer.</div>
+                </div>
+            </div>
+            <div class="cl-item" data-id="spirit-island" onclick="toggleClItem(this)">
+                <input type="checkbox" aria-hidden="true"><div class="cl-check">&#10003;</div>
+                <div class="cl-emoji">&#9973;</div>
+                <div class="cl-body">
+                    <div class="cl-title"><strong>Maligne Lake Spirit Island Cruise &mdash; Jun 21</strong></div>
+                    <div class="cl-detail">malignelake.com &mdash; book noon departure. Can sell out weeks ahead.</div>
+                </div>
+            </div>
+            <div class="cl-item" data-id="calgary-hotel" onclick="toggleClItem(this)">
+                <input type="checkbox" aria-hidden="true"><div class="cl-check">&#10003;</div>
+                <div class="cl-emoji">&#127961;</div>
+                <div class="cl-body">
+                    <div class="cl-title"><strong>Calgary airport hotel &mdash; Jun 22</strong><span class="cl-badge tbc">TBC</span></div>
+                    <div class="cl-detail">Marriott Calgary Airport, Delta Hotels YYC, or Acclaim Hotel &mdash; must be within 5 min of YYC.</div>
+                </div>
+            </div>
+            <div class="cl-item" data-id="calgary-dinner" onclick="toggleClItem(this)">
+                <input type="checkbox" aria-hidden="true"><div class="cl-check">&#10003;</div>
+                <div class="cl-emoji">&#127830;</div>
+                <div class="cl-body">
+                    <div class="cl-title"><strong>Calgary farewell dinner &mdash; Jun 22</strong></div>
+                    <div class="cl-detail">Caesar&rsquo;s Steakhouse or The Keg &mdash; reserve for 7:30 PM.</div>
+                </div>
+            </div>
+            <div class="cl-item" data-id="flight-in" onclick="toggleClItem(this)">
+                <input type="checkbox" aria-hidden="true"><div class="cl-check">&#10003;</div>
+                <div class="cl-emoji">&#9992;&#65039;</div>
+                <div class="cl-body">
+                    <div class="cl-title"><strong>Inbound flight &mdash; Jun 23</strong><span class="cl-badge booked">Booked</span></div>
+                    <div class="cl-detail">Delta DL 6948 &middot; YYC&rarr;JFK &middot; 09:45&ndash;16:35 &middot; Conf: EWEDLQ</div>
+                </div>
+            </div>
         </div>
 
         <div class="section-label">Budget Summary</div>
@@ -590,6 +701,41 @@
         }
         const days = Math.ceil((flight - now) / 86400000);
         pill.textContent = '\uD83D\uDDD3 ' + days + ' day' + (days === 1 ? '' : 's') + ' to go';
+    })();
+
+    // Booking checklist
+    function toggleClItem(el) {
+        var cb = el.querySelector('input[type="checkbox"]');
+        cb.checked = !cb.checked;
+        updateChecklist();
+    }
+    function updateChecklist() {
+        var items = document.querySelectorAll('.cl-item input[type="checkbox"]');
+        var total = items.length, done = 0, state = {};
+        items.forEach(function(cb) {
+            var id = cb.closest('.cl-item').dataset.id;
+            if (cb.checked) { done++; state[id] = 1; }
+        });
+        localStorage.setItem('banff-checklist-2026', JSON.stringify(state));
+        var fill = document.getElementById('cl-fill');
+        var text = document.getElementById('cl-text');
+        if (fill) fill.style.width = (done / total * 100) + '%';
+        if (text) text.textContent = done + ' of ' + total + ' complete';
+    }
+    function resetChecklist() {
+        if (!confirm('Clear all checklist items?')) return;
+        document.querySelectorAll('.cl-item input[type="checkbox"]').forEach(function(cb) { cb.checked = false; });
+        localStorage.removeItem('banff-checklist-2026');
+        updateChecklist();
+    }
+    // Init checklist — restore saved state; pre-check already-booked items on first load
+    (function() {
+        var raw = localStorage.getItem('banff-checklist-2026');
+        var saved = raw ? JSON.parse(raw) : { 'hinton-hotel': 1, 'flight-out': 1, 'calgary-hotel-15': 1, 'banff-hotel': 1, 'flight-in': 1 };
+        document.querySelectorAll('.cl-item').forEach(function(item) {
+            if (saved[item.dataset.id]) item.querySelector('input').checked = true;
+        });
+        updateChecklist();
     })();
 
     // Service worker for offline support
