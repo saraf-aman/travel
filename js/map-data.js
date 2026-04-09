@@ -97,9 +97,10 @@ const TRIP_MAP_DATA = (() => {
 
   // Route waypoints per day — connects stops + highway midpoints for a truer path
   const ROUTES = [
-    // Day 1: Calgary → Castle Junction → Kootenay NP → Banff → Canmore
+    // Day 1: Calgary → Calgary Airport Hotel → Castle Junction → Kootenay NP → Banff → Canmore
     [
-      [51.0447,-114.0719],
+      [51.0447,-114.0719], // YYC (car pickup)
+      [51.1315,-114.0100], // Calgary Airport Hotel (pickup parents)
       [51.0800,-115.0000],
       [51.2150,-115.9900], // Castle Junction
       [51.1830,-116.1310], // Marble Canyon

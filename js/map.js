@@ -30,7 +30,7 @@ const TripMap = (() => {
       // Resolve vendor path relative to this script's own location
       const scripts = document.querySelectorAll('script[src]');
       for (const s of scripts) {
-        if (s.src.includes('map.js')) return s.src.replace('map.js', '');
+        if (s.src.includes('map.js')) return s.src.split('?')[0].replace('map.js', '');
       }
       return '../../js/';
     })();
