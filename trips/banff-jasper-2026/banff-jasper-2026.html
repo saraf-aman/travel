@@ -7,7 +7,7 @@
     <script>if(localStorage.getItem('travel-theme')==='dark')document.documentElement.setAttribute('data-theme','dark');</script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../css/base.css?v=8b39bc24">
-    <link rel="stylesheet" href="../../css/trips/banff-jasper-2026.css?v=9f03ee56">
+    <link rel="stylesheet" href="../../css/trips/banff-jasper-2026.css?v=361ca360">
     <link rel="manifest" href="../../manifest.json">
     <meta name="theme-color" content="#2c6a90">
     <script src="../../js/darkmode.js?v=2d9d6915" defer></script>
@@ -46,12 +46,6 @@
     </div>
 </div>
 
-<div class="quick-links-bar">
-    <span class="quick-links-label">Conditions</span>
-    <a href="https://parks.canada.ca/pn-np/bc/yoho" target="_blank" rel="noopener" class="quick-link">&#127956; Yoho</a>
-    <a href="https://parks.canada.ca/pn-np/ab/banff" target="_blank" rel="noopener" class="quick-link">&#127956; Banff</a>
-    <a href="https://clearoutside.com/forecast/52.88/-117.95" target="_blank" rel="noopener" class="quick-link">&#11088; Dark Sky</a>
-</div>
 
 <div class="tab-nav-wrap">
     <div class="tab-nav">
@@ -498,6 +492,32 @@
             </div>
         </div>
 
+        <div class="section-label">Road &amp; Conditions</div>
+        <div class="detail-card">
+            <div class="cond-grid">
+                <a href="https://parks.canada.ca/pn-np/ab/banff" target="_blank" rel="noopener" class="cond-link">
+                    <div class="cond-link-top">&#127956; <strong>Banff</strong></div>
+                    <div class="cond-link-sub">Icefields Pkwy &amp; Bow Valley closures</div>
+                </a>
+                <a href="https://parks.canada.ca/pn-np/bc/yoho" target="_blank" rel="noopener" class="cond-link">
+                    <div class="cond-link-top">&#127956; <strong>Yoho</strong></div>
+                    <div class="cond-link-sub">Yoho Valley Rd &mdash; check night of Day 2</div>
+                </a>
+                <a href="https://parks.canada.ca/pn-np/ab/jasper" target="_blank" rel="noopener" class="cond-link">
+                    <div class="cond-link-top">&#127956; <strong>Jasper</strong></div>
+                    <div class="cond-link-sub">Maligne Lake &amp; park access &mdash; Days 5&ndash;6</div>
+                </a>
+                <a href="https://511.alberta.ca/" target="_blank" rel="noopener" class="cond-link">
+                    <div class="cond-link-top">&#128663; <strong>511 Alberta</strong></div>
+                    <div class="cond-link-sub">Highway closures &amp; live road status</div>
+                </a>
+                <a href="https://clearoutside.com/forecast/52.88/-117.95" target="_blank" rel="noopener" class="cond-link">
+                    <div class="cond-link-top">&#11088; <strong>Dark Sky</strong></div>
+                    <div class="cond-link-sub">Stargazing forecast &mdash; check evening of Day 5</div>
+                </a>
+            </div>
+        </div>
+
         <div class="booking-checklist">
             <div class="checklist-header-top">
                 <h3>&#128203; Booking Checklist</h3>
@@ -648,8 +668,7 @@
     // Keep tab-nav-wrap top in sync with actual heights of sticky bars above it
     function updateTabNavTop(){
         const topNavH = document.querySelector('.top-nav').offsetHeight;
-        const quickLinksH = document.querySelector('.quick-links-bar').offsetHeight;
-        document.querySelector('.tab-nav-wrap').style.top = (topNavH + quickLinksH) + 'px';
+        document.querySelector('.tab-nav-wrap').style.top = topNavH + 'px';
     }
     updateTabNavTop();
     window.addEventListener('resize', updateTabNavTop);
@@ -661,7 +680,6 @@
         btn.classList.add('active');
         history.replaceState(null,'','#'+id);
         const stickyH = document.querySelector('.top-nav').offsetHeight
-                      + document.querySelector('.quick-links-bar').offsetHeight
                       + document.querySelector('.tab-nav-wrap').offsetHeight;
         window.scrollTo({top: document.querySelector('.main').offsetTop - stickyH, behavior:'smooth'});
     }
