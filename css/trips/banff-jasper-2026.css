@@ -214,7 +214,8 @@
   .countdown-pill.active{background:var(--amber-pale);border-color:rgba(212,135,42,.4);color:var(--amber)}
 
   /* Quick-links bar */
-  .quick-links-bar{position:sticky;top:48px;z-index:99;background:var(--mist-dark);border-bottom:1px solid var(--border);padding:7px 20px;display:flex;align-items:center;gap:7px;flex-wrap:wrap;font-size:12px}
+  .quick-links-bar{position:sticky;top:48px;z-index:99;background:var(--mist-dark);border-bottom:1px solid var(--border);padding:7px 20px;display:flex;align-items:center;gap:7px;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;font-size:12px}
+  .quick-links-bar::-webkit-scrollbar{display:none}
   .quick-links-label{color:var(--stone);font-weight:500;letter-spacing:.06em;text-transform:uppercase;font-size:10px;flex-shrink:0}
   .quick-links-divider{width:1px;height:14px;background:var(--border);flex-shrink:0;margin:0 2px}
   .quick-link{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;background:var(--snow);border:1px solid var(--border);border-radius:100px;color:var(--glacier-dark);text-decoration:none;font-size:11px;font-weight:500;transition:all .15s;white-space:nowrap}
