@@ -229,6 +229,8 @@
   .cl-item:has(input:checked){opacity:.65}
   .cl-item:has(input:checked) .cl-title strong{text-decoration:line-through;color:var(--stone)}
   .cl-item:has(input:checked) .cl-detail{opacity:.6}
+  .cl-link{color:var(--glacier-dark);text-decoration:underline;text-decoration-color:rgba(0,100,140,.3);text-underline-offset:2px}
+  .cl-link:hover{text-decoration-color:var(--glacier-dark)}
 
   .cl-badge{font-size:10px;font-weight:500;padding:2px 8px;border-radius:99px;letter-spacing:.03em;white-space:nowrap;flex-shrink:0}
   .cl-badge.urgent{background:#fff3cd;color:#7a4e00;border:1px solid #e8c96a}
