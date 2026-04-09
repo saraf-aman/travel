@@ -15,6 +15,52 @@
   --snow:     #ffffff;
 }
 
+/* ── DARK MODE (homepage) ─────────────────────────────────── */
+:root[data-theme="dark"] {
+  --cream:    #1a1714;
+  --warm:     #221f1b;
+  --border:   #3a3530;
+  --stone:    #8a817a;
+  --stone-dk: #c4b4a8;
+  --ink:      #f0ebe4;
+  --ink-mid:  #d4c4b8;
+  --snow:     #201d1a;
+  --accent-bg:#2a1e10;
+  --accent-lt:#7a5030;
+}
+
+/* Elements using --ink as a dark background — re-pin them in dark mode */
+[data-theme="dark"] .card-cta             { background: var(--accent); }
+[data-theme="dark"] .card-cta:hover       { background: var(--stone-dk); }
+[data-theme="dark"] .github-bar           { background: #2a2520; border: 1px solid var(--border); }
+[data-theme="dark"] .github-bar h3        { color: var(--ink); }
+[data-theme="dark"] .github-bar p         { color: var(--stone-dk); }
+[data-theme="dark"] footer                { background: var(--warm); }
+
+/* ── THEME TOGGLE BUTTON (shared) ────────────────────────── */
+.theme-toggle {
+  background: none;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+  color: var(--stone-dk);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.6;
+  transition: opacity 0.15s, background 0.15s;
+  flex-shrink: 0;
+}
+.theme-toggle:hover        { opacity: 1; background: var(--warm); }
+.theme-toggle svg          { transition: transform 0.35s ease; }
+.theme-toggle:hover svg    { transform: rotate(18deg); }
+
+/* Show moon in light, sun in dark */
+.icon-sun                  { display: none; }
+[data-theme="dark"] .icon-moon { display: none; }
+[data-theme="dark"] .icon-sun  { display: block; }
+
 * { 
   margin: 0; 
   padding: 0; 

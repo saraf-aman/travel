@@ -52,6 +52,14 @@
   .hero{background:linear-gradient(160deg,#e8f4fb 0%,#c8dff0 40%,#a8ccdf 100%);position:relative;overflow:hidden;padding:64px 24px 48px;text-align:center}
   .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 110%,rgba(74,144,184,.25) 0%,transparent 70%),radial-gradient(ellipse 50% 30% at 10% 0%,rgba(255,255,255,.6) 0%,transparent 60%);pointer-events:none}
   .hero-mountains{position:absolute;bottom:0;left:0;right:0;height:140px;pointer-events:none}
+  /* Light mode mountain fills — blue-tinted, no pure white */
+  .mtn-back  { fill: rgba(184,214,237,0.45); }
+  .mtn-front { fill: rgba(210,232,245,0.65); }
+  .mtn-peak  { fill: rgba(235,247,255,0.90); }
+  /* Dark mode — layered dark-blue silhouettes */
+  [data-theme="dark"] .mtn-back  { fill: rgba(10,45,75,0.75); }
+  [data-theme="dark"] .mtn-front { fill: rgba(15,58,95,0.60); }
+  [data-theme="dark"] .mtn-peak  { fill: rgba(55,105,150,0.50); }
   .hero-eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--glacier-dark);margin-bottom:14px;opacity:0;animation:fadeUp .6s ease .1s forwards}
   .hero h1{font-family:'Playfair Display',serif;font-size:clamp(34px,7vw,66px);font-weight:700;color:var(--ink);line-height:1.05;margin-bottom:10px;opacity:0;animation:fadeUp .6s ease .25s forwards}
   .hero h1 em{font-style:italic;color:var(--glacier-dark)}
@@ -393,3 +401,71 @@
   .wp-slash { color: var(--stone); margin: 0 1px; }
   .wp-rain  { font-size: 10px; color: var(--stone-dark); }
   .wp-empty { color: var(--stone); }
+
+  /* ── DARK MODE (trip page) ──────────────────────────────── */
+  :root[data-theme="dark"] {
+    --sky:          #0a1c2e;
+    --sky-mid:      #14304a;
+    --sky-deep:     #1e4a6a;
+    --glacier:      #5aa0c8;
+    --glacier-dark: #88bbda;
+    --snow:         #0d1e2d;
+    --mist:         #09161f;
+    --mist-dark:    #0c1c28;
+    --stone:        #7090a4;
+    --stone-dark:   #90aabb;
+    --slate:        #a8c4d8;
+    --ink:          #e0eef8;
+    --amber-pale:   #1e1006;
+    --text-dark:    #d8ecf8;
+    --text-mid:     #98b8ca;
+    --text-light:   #6888a0;
+    --border:       #1a3248;
+  }
+
+  [data-theme="dark"] .budget-card {
+    background: #061525;
+  }
+  [data-theme="dark"] .rest-dish {
+    background: rgba(10,35,58,0.60);
+    border-color: var(--border);
+    color: var(--text-mid);
+  }
+  [data-theme="dark"] .hero-pill {
+    background: rgba(10,35,58,0.70);
+    border-color: rgba(74,144,184,0.35);
+    color: var(--slate);
+  }
+  [data-theme="dark"] .hero {
+    background: linear-gradient(160deg, #0d1e2d 0%, #102435 40%, #0a1928 100%);
+  }
+  /* Strip the hard-coded white radial overlay */
+  [data-theme="dark"] .hero::before {
+    background: radial-gradient(ellipse 70% 50% at 50% 110%, rgba(74,144,184,.15) 0%, transparent 70%);
+  }
+  /* Fix hard-coded #fef9f0 end-stop in the birthday banner gradient */
+  [data-theme="dark"] .birthday-banner {
+    background: linear-gradient(135deg, #2a1a06 0%, #1e1206 100%);
+    color: #c49050;
+    border-color: rgba(212,135,42,.2);
+  }
+  [data-theme="dark"] .weather-strip {
+    background: linear-gradient(90deg, #0a1928 0%, #0d2035 100%);
+  }
+  [data-theme="dark"] .wp-grid {
+    background: linear-gradient(90deg, #0a1928, #0d2035);
+  }
+  [data-theme="dark"] .restaurant-highlight {
+    background: linear-gradient(135deg, var(--sky) 0%, var(--mist-dark) 100%);
+  }
+  [data-theme="dark"] footer {
+    background: #040e17;
+  }
+  /* top-nav uses box-shadow with a light rgba — dampen in dark mode */
+  [data-theme="dark"] .top-nav {
+    box-shadow: 0 1px 8px rgba(0,0,0,0.4);
+  }
+  /* theme toggle positioning in trip top-nav */
+  .top-nav .theme-toggle {
+    margin-left: auto;
+  }

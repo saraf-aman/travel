@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Banff & Jasper 2026 — Aman's Travel</title>
+    <script>if(localStorage.getItem('travel-theme')==='dark')document.documentElement.setAttribute('data-theme','dark');</script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/base.css?v=57a0c8fd">
-    <link rel="stylesheet" href="../../css/trips/banff-jasper-2026.css?v=0cacf436">
+    <link rel="stylesheet" href="../../css/base.css?v=8b39bc24">
+    <link rel="stylesheet" href="../../css/trips/banff-jasper-2026.css?v=8562c5b7">
     <link rel="manifest" href="../../manifest.json">
     <meta name="theme-color" content="#2c6a90">
+    <script src="../../js/darkmode.js?v=2d9d6915" defer></script>
 </head>
 <body>
 
@@ -16,16 +18,20 @@
 <div class="top-nav">
     <a href="../../index.html" class="back-btn">← All Trips</a>
     <div class="top-nav-title">Banff &amp; <em>Jasper</em> 2026</div>
+    <button id="theme-toggle" class="theme-toggle" title="Toggle dark mode" aria-label="Toggle dark mode">
+      <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun"  width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
 </div>
 
 <div class="hero">
     <svg class="hero-mountains" viewBox="0 0 1440 140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-        <polygon points="0,140 180,55 300,95 440,25 560,80 700,20 820,70 960,15 1100,65 1260,30 1440,60 1440,140" fill="rgba(184,214,237,0.45)"/>
-        <polygon points="0,140 120,85 220,115 360,50 480,95 600,40 720,85 860,35 980,80 1100,45 1220,75 1340,50 1440,70 1440,140" fill="rgba(255,255,255,0.6)"/>
-        <polygon points="340,50 360,25 380,50" fill="rgba(255,255,255,0.95)"/>
-        <polygon points="580,40 600,12 620,40" fill="rgba(255,255,255,0.95)"/>
-        <polygon points="840,35 860,8 880,35" fill="rgba(255,255,255,0.95)"/>
-        <polygon points="1080,45 1100,18 1120,45" fill="rgba(255,255,255,0.95)"/>
+        <polygon class="mtn-back"  points="0,140 180,55 300,95 440,25 560,80 700,20 820,70 960,15 1100,65 1260,30 1440,60 1440,140"/>
+        <polygon class="mtn-front" points="0,140 120,85 220,115 360,50 480,95 600,40 720,85 860,35 980,80 1100,45 1220,75 1340,50 1440,70 1440,140"/>
+        <polygon class="mtn-peak"  points="340,50 360,25 380,50"/>
+        <polygon class="mtn-peak"  points="580,40 600,12 620,40"/>
+        <polygon class="mtn-peak"  points="840,35 860,8 880,35"/>
+        <polygon class="mtn-peak"  points="1080,45 1100,18 1120,45"/>
     </svg>
     <div class="hero-eyebrow">Family Trip &middot; June 2026</div>
     <h1>Banff &amp; <em>Jasper</em></h1>
