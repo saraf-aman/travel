@@ -296,6 +296,11 @@
 
   .booking-details-text{margin-top:10px;font-size:12px;color:var(--text-mid);line-height:1.6}
   .booking-details-text strong{color:var(--ink)}
+
+  .activity-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:12px}
+  .act-card-badge{display:flex;justify-content:space-between;align-items:flex-start}
+  .act-booking-link{font-size:11px;color:var(--glacier-dark);text-decoration:underline;text-decoration-color:rgba(0,100,140,.3);text-underline-offset:2px}
+  .act-booking-link:hover{text-decoration-color:var(--glacier-dark)}
   .detail-note{font-size:12px;color:var(--text-mid)}
   .detail-note strong{color:var(--ink)}
 
@@ -324,6 +329,7 @@
     .card-body-inner{padding:14px}
     .day-header{flex-direction:column;align-items:flex-start;gap:10px}
     .info-grid{grid-template-columns:1fr 1fr}
+    .activity-grid{grid-template-columns:1fr}
     .hero h1{font-size:34px}
     .hero{padding:48px 20px 36px}
     .main{padding:24px 16px 60px}
