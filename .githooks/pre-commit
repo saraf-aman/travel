@@ -1,6 +1,11 @@
 #!/bin/sh
-# Rewrite cache-busting hashes in all HTML files before each commit.
-python3 bust.py
+# Auto-update the SW cache version by hashing all HTML/CSS/JS content.
+# Forces the service worker to reinstall and re-crawl whenever any
+# page, stylesheet, or script changes.
 
-# Re-stage any HTML files that bust.py just modified
-git diff --name-only -- '*.html' | xargs -r git add
+HASH=$(find . \( -name "*.html" -o -name "*.css" -o -name "*.js" \) \
+  ! -path "./.git/*" ! -name "sw.js" | sort | xargs cat 2>/dev/null \
+  | shasum | cut -c1-8)
+
+sed -i '' "s/const CACHE = 'travel-[^']*'/const CACHE = 'travel-$HASH'/" sw.js
+git add sw.js

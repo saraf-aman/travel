@@ -1,20 +1,66 @@
-const CACHE = 'travel-v1';
-
-// Only the bare minimum needed offline before a first visit.
-// Everything else gets cached automatically on first fetch (see fetch handler below).
-const PRECACHE = [
-  '/travel/',
-];
+const CACHE = 'travel-eed30769';
+const ORIGIN = self.location.origin;
 
 // Strip version query params (?v=...) so cache hits survive hash changes
-function cacheKey(request) {
-  const url = new URL(request.url);
-  url.search = '';
-  return url.toString();
+function cacheKey(url) {
+  const u = new URL(url, ORIGIN);
+  u.search = '';
+  return u.toString();
+}
+
+// Extract all same-origin CSS and JS URLs from an HTML string
+function extractAssets(html, baseUrl) {
+  const urls = [];
+  for (const [, href] of html.matchAll(/href="([^"]+\.css)[^"]*"/g)) {
+    try { urls.push(cacheKey(new URL(href, baseUrl).href)); } catch {}
+  }
+  for (const [, src] of html.matchAll(/src="([^"]+\.js)[^"]*"/g)) {
+    try { urls.push(cacheKey(new URL(src, baseUrl).href)); } catch {}
+  }
+  return [...new Set(urls)].filter(u => u.startsWith(ORIGIN));
+}
+
+// On install: crawl the homepage, discover all linked pages, cache everything
+async function precacheAll(cache) {
+  const homeUrl = self.registration.scope;
+
+  const homeRes = await fetch(homeUrl);
+  if (!homeRes.ok) return;
+  const homeHtml = await homeRes.clone().text();
+  await cache.put(homeUrl, homeRes);
+
+  // Find all internal .html links from the homepage
+  const pageUrls = [...homeHtml.matchAll(/href="([^"]+\.html)"/g)].flatMap(([, href]) => {
+    try {
+      const u = new URL(href, homeUrl);
+      return u.href.startsWith(ORIGIN) ? [u.href] : [];
+    } catch { return []; }
+  });
+
+  // Fetch each linked page, cache it, and collect its assets
+  const homeAssets = extractAssets(homeHtml, homeUrl);
+  const tripAssets = (await Promise.all(pageUrls.map(async pageUrl => {
+    try {
+      const res = await fetch(pageUrl);
+      if (!res.ok) return [];
+      const html = await res.clone().text();
+      await cache.put(cacheKey(pageUrl), res);
+      return extractAssets(html, pageUrl);
+    } catch { return []; }
+  }))).flat();
+
+  // Cache all discovered CSS/JS assets
+  const allAssets = [...new Set([...homeAssets, ...tripAssets])];
+  await Promise.all(allAssets.map(async assetUrl => {
+    try {
+      const res = await fetch(assetUrl);
+      if (res.ok) await cache.put(assetUrl, res);
+    } catch {}
+  }));
 }
 
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(PRECACHE)));
+  e.waitUntil(caches.open(CACHE).then(precacheAll));
   self.skipWaiting();
 });
 
@@ -45,10 +91,10 @@ self.addEventListener('fetch', e => {
   }
 
   // Skip other cross-origin (Google Fonts etc) — let them load normally or fail gracefully
-  if (!e.request.url.startsWith(self.location.origin)) return;
+  if (!e.request.url.startsWith(ORIGIN)) return;
 
   const isDoc = e.request.destination === 'document';
-  const key = cacheKey(e.request);
+  const key = cacheKey(e.request.url);
 
   if (isDoc) {
     // Network-first for HTML: always try fresh, fall back to cache when offline
