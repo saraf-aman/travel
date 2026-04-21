@@ -6,6 +6,13 @@ const PRECACHE = [
   '/travel/',
 ];
 
+// Strip version query params (?v=...) so cache hits survive hash changes
+function cacheKey(request) {
+  const url = new URL(request.url);
+  url.search = '';
+  return url.toString();
+}
+
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(PRECACHE)));
   self.skipWaiting();
@@ -41,6 +48,7 @@ self.addEventListener('fetch', e => {
   if (!e.request.url.startsWith(self.location.origin)) return;
 
   const isDoc = e.request.destination === 'document';
+  const key = cacheKey(e.request);
 
   if (isDoc) {
     // Network-first for HTML: always try fresh, fall back to cache when offline
@@ -48,17 +56,17 @@ self.addEventListener('fetch', e => {
       fetch(e.request)
         .then(res => {
           const copy = res.clone();
-          caches.open(CACHE).then(c => c.put(e.request, copy));
+          caches.open(CACHE).then(c => c.put(key, copy));
           return res;
         })
-        .catch(() => caches.match(e.request))
+        .catch(() => caches.match(key))
     );
   } else {
     // Cache-first for CSS/assets: fast load, update cache in background
     e.respondWith(
-      caches.match(e.request).then(cached => {
+      caches.match(key).then(cached => {
         const network = fetch(e.request).then(res => {
-          if (res.ok) caches.open(CACHE).then(c => c.put(e.request, res.clone()));
+          if (res.ok) caches.open(CACHE).then(c => c.put(key, res.clone()));
           return res;
         });
         return cached || network;
