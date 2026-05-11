@@ -1,0 +1,21 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# JetBrains IDEs
+.idea/
+
+# VS Code
+.vscode/
+
+# Claude Code
+.claude/
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Misc
+*.log
+*.tmp
