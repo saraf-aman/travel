@@ -691,14 +691,6 @@
                     <div class="cl-detail">Hotel 11, MOD A Sonesta Collection &middot; 11 Freeport Cres NE &middot; Check-in 4:00 PM</div>
                 </div>
             </div>
-            <div class="cl-item" data-id="discovery-pass" onclick="toggleClItem(this)">
-                <input type="checkbox" aria-hidden="true"><div class="cl-check">&#10003;</div>
-                <div class="cl-emoji">&#127956;</div>
-                <div class="cl-body">
-                    <div class="cl-title"><strong>Parks Canada Discovery Pass</strong></div>
-                    <div class="cl-detail">CAD $167.50/family &mdash; covers all national parks on the trip. Buy online at <a href="https://www.pc.gc.ca/en/voyage-travel/admission" target="_blank" rel="noopener" class="cl-link" onclick="event.stopPropagation()">pc.gc.ca</a> or at the first park gate on Day 1.</div>
-                </div>
-            </div>
             <div class="cl-item" data-id="banff-hotel" onclick="toggleClItem(this)">
                 <input type="checkbox" aria-hidden="true"><div class="cl-check">&#10003;</div>
                 <div class="cl-emoji">&#127968;</div>
@@ -753,14 +745,6 @@
                 <div class="cl-body">
                     <div class="cl-title"><strong>Calgary airport hotel &mdash; Jun 22</strong><span class="cl-badge tbc">TBC</span></div>
                     <div class="cl-detail">Marriott Calgary Airport, Delta Hotels YYC, or Acclaim Hotel &mdash; must be within 5 min of YYC.</div>
-                </div>
-            </div>
-            <div class="cl-item" data-id="calgary-dinner" onclick="toggleClItem(this)">
-                <input type="checkbox" aria-hidden="true"><div class="cl-check">&#10003;</div>
-                <div class="cl-emoji">&#127830;</div>
-                <div class="cl-body">
-                    <div class="cl-title"><strong>Calgary farewell dinner &mdash; Jun 22</strong></div>
-                    <div class="cl-detail">Caesar&rsquo;s Steakhouse or The Keg &mdash; reserve for 7:30 PM.</div>
                 </div>
             </div>
             <div class="cl-item" data-id="flight-in" onclick="toggleClItem(this)">
@@ -890,7 +874,7 @@
     // Init checklist — restore saved state; pre-check already-booked items on first load
     (function() {
         var raw = localStorage.getItem('banff-checklist-2026');
-        var saved = raw ? JSON.parse(raw) : { 'hinton-hotel': 1, 'flight-out': 1, 'calgary-hotel-15': 1, 'banff-hotel': 1, 'flight-in': 1 };
+        var saved = raw ? JSON.parse(raw) : { 'parks-account': 1, 'moraine-shuttle': 1, 'flight-out': 1, 'calgary-hotel-15': 1, 'banff-hotel': 1, 'gondola': 1, 'hinton-hotel': 1, 'ice-explorer': 1, 'spirit-island': 1, 'calgary-hotel': 1, 'flight-in': 1 };
         document.querySelectorAll('.cl-item').forEach(function(item) {
             if (saved[item.dataset.id]) item.querySelector('input').checked = true;
         });
