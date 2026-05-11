@@ -1,4 +1,4 @@
-const CACHE = 'travel-eed30769';
+const CACHE = 'travel-ef2fcfc6';
 const ORIGIN = self.location.origin;
 
 // Strip version query params (?v=...) so cache hits survive hash changes

@@ -49,6 +49,12 @@ A `cacheKey()` helper strips `?v=` query params before using a URL as a cache ke
 
 On install, the service worker crawls the homepage, discovers all linked `.html`, `.css`, `.js` files, and pre-caches them all (deduplicated). On activate, it deletes all old caches whose name doesn't match the current `CACHE` constant.
 
+**Cross-origin requests (Google Fonts, external APIs, CDNs) are skipped entirely** — the service worker does not attempt to cache or intercept them:
+```js
+if (!e.request.url.startsWith(self.location.origin)) return;
+```
+This means external fonts fail gracefully offline (browser falls back to system fonts) rather than stalling or erroring out.
+
 ---
 
 ### 4. PWA Manifest (`manifest.json`)
@@ -105,6 +111,29 @@ Linked in every HTML `<head>`:
       document.documentElement.setAttribute('data-theme', 'dark');
   </script>
   ```
+
+---
+
+## Known Gotchas
+
+### Google Fonts + Offline Mode: the `@import` trap
+
+**Problem:** If you load Google Fonts via `@import url('https://fonts.googleapis.com/...')` inside a CSS file (e.g. `base.css`), you will break offline mode even if the service worker is set up correctly.
+
+When the service worker serves that CSS file from cache offline, the browser still tries to resolve the `@import` URL at render time. That outbound request stalls, blocks rendering, and ultimately fails — even though the rest of the page is cached and ready.
+
+**The fix (two rules to follow):**
+
+1. **Never use `@import` for Google Fonts in CSS.** Load fonts exclusively via `<link rel="stylesheet">` in the HTML `<head>`. A failed `<link>` is handled gracefully by the browser without blocking; a failed `@import` inside cached CSS is not.
+
+2. **Skip all cross-origin requests in the service worker** — do not attempt to cache or intercept them:
+   ```js
+   if (!e.request.url.startsWith(self.location.origin)) return;
+   ```
+   This means Google Fonts load normally when online and fail silently when offline, falling back to the system font stack. That is the intended behaviour.
+
+**What works offline:** HTML, CSS, JS, and any other same-origin assets.
+**What does not work offline (by design):** Google Fonts, external APIs, CDN-hosted images.
 
 ---
 
@@ -166,6 +195,10 @@ Create a service worker with:
     - HTML files (same-origin): network-first, fall back to cache
     - CSS/JS files (same-origin): cache-first
     - Everything else: network only (no caching)
+- Skip all cross-origin requests entirely — do not cache or intercept them:
+    if (!e.request.url.startsWith(self.location.origin)) return;
+  This ensures Google Fonts and external APIs fail gracefully offline instead
+  of stalling or producing errors.
 - Register the service worker in every HTML file:
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
@@ -239,6 +272,19 @@ Define all colors as CSS custom properties with both light and dark values:
   doesn't store multiple copies of the same file
 - manifest.json must be linked in HTML before the service worker registration
 - The dark mode anti-flash script must be the very first <script> in <head>
+
+## Google Fonts rules (critical for offline mode)
+
+1. Load Google Fonts ONLY via <link rel="stylesheet"> in the HTML <head>.
+   NEVER use @import url('https://fonts.googleapis.com/...') inside any CSS
+   file. When CSS is served from the service worker cache offline, the browser
+   still tries to resolve @import URLs, which blocks rendering and fails.
+   A failed <link> in HTML is handled gracefully; a failed @import is not.
+
+2. The service worker must skip all cross-origin requests entirely:
+     if (!e.request.url.startsWith(self.location.origin)) return;
+   Do not attempt to cache Google Fonts. They will load when online and fall
+   back to the system font stack when offline. That is the correct behaviour.
 
 Do not add any npm dependencies, build tools, frameworks, or transpilation.
 Pure vanilla HTML, CSS, and JavaScript only.
